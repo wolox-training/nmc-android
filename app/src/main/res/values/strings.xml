@@ -12,5 +12,13 @@
     <string name="page_2_toolbar_title">Example Request</string>
     <string name="fragment_example_username">Username</string>
     <string name="fragment_example_login">Login</string>
+    <string name="ingrese_mail">Mail</string>
+    <string name="ingrese_contraseña">Contraseña</string>
+    <string name="boton_login">LOG IN</string>
+    <string name="boton_signup">SIGN UP</string>
+    <string name="footer_tyc">By joing you agree to our <u>Terms &amp; Conditions</u></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
