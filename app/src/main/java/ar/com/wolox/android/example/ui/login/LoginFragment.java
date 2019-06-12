@@ -33,27 +33,44 @@ public class LoginFragment extends WolmoFragment {
 
     @Override
     public void init() {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.sharedPref), Context.MODE_PRIVATE);
-        Boolean logged = false;
         buttonLogin = getActivity().findViewById(R.id.button_login);
         buttonSignup = getActivity().findViewById(R.id.button_signup);
         textMail = getActivity().findViewById(R.id.text_mail);
         textPass = getActivity().findViewById(R.id.text_pass);
 
-        logged = isLogged(sharedPref);
+        obtenerCredenciales();
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (textMail.getText().toString().equals("") && textPass.getText().toString().equals("")) {
-                    textMail.setError("El Mail es requerido");
-                    textPass.setError("La Contraseña es Requerida");
-                } else {
-                    if (!formatoValido(textMail.getText().toString())) {
-                        textMail.setError("Formato de Mail inválido");
-                    } else {
-                        guardarCredenciales(sharedPref);
+                String mail = textMail.getText().toString();
+                Boolean m, p;
+                m = textMail.getText().toString().equals("");
+                p = textPass.getText().toString().equals("");
+
+                if (m && p) {
+                    textMail.setError(getString(R.string.reqMail));
+                    textPass.setError(getString(R.string.reqPass));
+                    return;
+                }
+
+                if (!m && p) {
+                    textPass.setError(getString(R.string.reqPass));
+                    if (!formatoValido(mail)) {
+                        textMail.setError(getString(R.string.invMail));
                     }
+                    return;
+                }
+
+                if (m) {
+                    textMail.setError(getString(R.string.reqMail));
+                    return;
+                }
+
+                if (!formatoValido(mail)) {
+                    textMail.setError(getString(R.string.invMail));
+                } else {
+                    guardarCredenciales();
                 }
             }
         });
@@ -74,16 +91,28 @@ public class LoginFragment extends WolmoFragment {
         return matcher.matches();
     }
 
-    private boolean isLogged(SharedPreferences sh) {
-        String mail = sh.getString(getString(R.string.sharedPref), getString(R.string.none));
-        Log.d(getString(R.string.cred), mail);
-        return !mail.equals(getString(R.string.none));
+    private void guardarCredenciales() {
+        SharedPreferences shm = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor edm = shm.edit();
+
+        edm.putString(getString(R.string.shMail), textMail.getText().toString());
+        edm.putString(getString(R.string.shPass), textPass.getText().toString());
+
+        edm.apply();
+
+        Log.d(getString(R.string.cred), "Guardadas OK");
     }
 
-    private void guardarCredenciales(SharedPreferences sh) {
-        SharedPreferences.Editor editor = sh.edit();
-        editor.putString(getString(R.string.sharedPref), textMail.getText().toString());
-        editor.apply();
-        Log.d(getString(R.string.cred), "Guardadas OK");
+    private void obtenerCredenciales() {
+        SharedPreferences shm = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        String mail = shm.getString(getString(R.string.shMail), "");
+        String pass = shm.getString(getString(R.string.shPass), "");
+
+        textMail.setText(mail);
+        textPass.setText(pass);
+
+        Log.d(getString(R.string.cred), mail);
+        Log.d(getString(R.string.cred), pass);
     }
 }
