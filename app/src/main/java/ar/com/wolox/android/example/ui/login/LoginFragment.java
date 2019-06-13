@@ -31,10 +31,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         textEmail = getActivity().findViewById(R.id.text_mail);
         textPass = getActivity().findViewById(R.id.text_pass);
 
+        loginPresenter.getCredentials(getActivity());
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginPresenter.onLoginButtonClicked(textEmail, textPass);
+                loginPresenter.onLoginButtonClicked(textEmail, textPass, getActivity(), getContext());
             }
         });
     }
@@ -58,5 +60,11 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void setInvalidEmail(String invEmail) {
         textEmail.setError(invEmail);
+    }
+
+    @Override
+    public void setCredentials(String email, String pass) {
+        textEmail.setText(email);
+        textPass.setText(pass);
     }
 }

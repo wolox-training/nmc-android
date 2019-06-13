@@ -1,5 +1,8 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.EditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +18,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     final String emailReq = "Email is required";
     final String passReq = "Password is required";
     final String invEmail = "Invalid Email";
+    final String emailKey = "ar.com.wolox.android.example.emailCredential";
+    final String passKey = "ar.com.wolox.android.example.passCredential";
 
     @Inject
     LoginPresenter() {}
@@ -22,8 +27,10 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     /**
      * @param email EditText with the User Email
      * @param pass EditText with the User Password
+     * @param activity Activity of LoginFragment
+     * @param context Context of LoginFragment
      */
-    public void onLoginButtonClicked(EditText email, EditText pass) {
+    public void onLoginButtonClicked(EditText email, EditText pass, Activity activity, Context context) {
 
         if (email.getText().toString().isEmpty() && pass.getText().toString().isEmpty()) {
             getView().setEmptyEmailPass(emailReq, passReq);
@@ -42,8 +49,10 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         } else {
             if (!validFormat(email.getText().toString())) {
                 getView().setInvalidEmail(invEmail);
+                return;
             }
         }
+        saveCredentials(email, pass, activity, context);
     }
 
     private boolean validFormat(String email) {
@@ -53,5 +62,27 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         Matcher matcher = pattern.matcher(email);
 
         return matcher.matches();
+    }
+
+    private void saveCredentials(EditText email, EditText pass, Activity activity, Context context) {
+          SharedPreferences sharedPreferences = activity.getPreferences(context.MODE_PRIVATE);
+          SharedPreferences.Editor editor = sharedPreferences.edit();
+
+          editor.putString(emailKey, email.getText().toString());
+          editor.putString(passKey, pass.getText().toString());
+
+          editor.apply();
+    }
+
+    /**
+     * @param activity Activity of LoginFragment
+     */
+    public void getCredentials(Activity activity) {
+          SharedPreferences sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE);
+
+          String email = sharedPreferences.getString(emailKey, "");
+          String pass = sharedPreferences.getString(passKey, "");
+
+          getView().setCredentials(email, pass);
     }
 }

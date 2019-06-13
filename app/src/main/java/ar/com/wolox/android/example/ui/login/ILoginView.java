@@ -12,4 +12,6 @@ interface ILoginView {
     void setEmptyPass(String passReq);
 
     void setEmptyEmail(String emailReq);
+
+    void setCredentials(String email, String pass);
 }
