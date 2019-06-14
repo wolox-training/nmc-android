@@ -4,8 +4,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import javax.inject.Inject;
-
 import ar.com.wolox.android.R;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
@@ -17,9 +15,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     Button buttonLogin, buttonSignup;
     EditText textEmail, textPass;
-
-    @Inject
-    LoginPresenter loginPresenter;
 
     @Override
     public int layout() {
@@ -34,30 +29,30 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         textEmail = getActivity().findViewById(R.id.text_mail);
         textPass = getActivity().findViewById(R.id.text_pass);
 
-        loginPresenter.attachView(this);
+        getPresenter().attachView(this);
 
-        loginPresenter.onInit(getContext());
+        getPresenter().onInit(getContext());
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginPresenter.onLoginButtonClicked(textEmail.getText().toString(), textPass.getText().toString(), getContext());
+                getPresenter().onLoginButtonClicked(textEmail.getText().toString(), textPass.getText().toString(), getContext());
             }
         });
     }
 
     @Override
-    public void setEmptyEmailPass() {
-        if (textEmail.getText().toString().isEmpty()) {
-            textEmail.setError(getString(R.string.email_required));
-        }
-        if (textPass.getText().toString().isEmpty()) {
-            textPass.setError(getString(R.string.password_required));
-        }
+    public void setEmptyEmailError() {
+        textEmail.setError(getString(R.string.email_required));
     }
 
     @Override
-    public void setInvalidEmail() {
+    public void setEmptyPassError() {
+        textPass.setError(getString(R.string.password_required));
+    }
+
+    @Override
+    public void setInvalidEmailError() {
         textEmail.setError(getString(R.string.invalid_email));
     }
 

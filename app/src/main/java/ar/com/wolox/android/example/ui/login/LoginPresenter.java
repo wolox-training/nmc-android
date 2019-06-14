@@ -34,11 +34,15 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             return;
         }
 
-        if (email.isEmpty() || pass.isEmpty()) {
-            getView().setEmptyEmailPass();
+        if (email.isEmpty()) {
+            getView().setEmptyEmailError();
+        } else {
+            if (!validFormat(email)) {
+                getView().setInvalidEmailError();
+            }
         }
-        if (!email.isEmpty() && !validFormat(email)) {
-            getView().setInvalidEmail();
+        if (pass.isEmpty()) {
+            getView().setEmptyPassError();
         }
     }
 
@@ -52,24 +56,24 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     private void saveCredentials(String email, String pass, Context context) {
-          SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, context.MODE_PRIVATE);
-          SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-          editor.putString(EMAIL_KEY, email);
-          editor.putString(PASSWORD_KEY, pass);
+        editor.putString(EMAIL_KEY, email);
+        editor.putString(PASSWORD_KEY, pass);
 
-          editor.apply();
+        editor.apply();
     }
 
     /**
      * @param context Context of LoginFragment
      */
     public void onInit(Context context) {
-          SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, context.MODE_PRIVATE);
 
-          String email = sharedPreferences.getString(EMAIL_KEY, "");
-          String pass = sharedPreferences.getString(PASSWORD_KEY, "");
+        String email = sharedPreferences.getString(EMAIL_KEY, "");
+        String pass = sharedPreferences.getString(PASSWORD_KEY, "");
 
-          getView().showCredentials(email, pass);
+        getView().showCredentials(email, pass);
     }
 }

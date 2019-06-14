@@ -48,9 +48,9 @@
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_none"
-        android:layout_weight="1"
         android:layout_margin="@dimen/spacing_medium_more"
+        android:layout_weight="1"
         android:gravity="bottom|center_horizontal"
-        android:textSize="@dimen/font_medium_extra"
-        android:text="@string/footer_tyc" />
+        android:text="@string/footer_tyc"
+        android:textSize="@dimen/font_medium_extra" />
 </LinearLayout>
