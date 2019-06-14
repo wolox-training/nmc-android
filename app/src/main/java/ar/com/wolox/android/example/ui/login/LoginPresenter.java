@@ -86,4 +86,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void onSignUpButtonClicked() {
         getView().goSignUp();
     }
+
+    public void onTermsAndConditionsClicked() {
+        getView().goTermsAndConditions();
+    }
 }

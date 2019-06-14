@@ -16,4 +16,6 @@ interface ILoginView {
     void goSignUp();
 
     void goHome();
+
+    void goTermsAndConditions();
 }

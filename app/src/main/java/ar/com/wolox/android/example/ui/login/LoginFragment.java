@@ -1,9 +1,11 @@
 package ar.com.wolox.android.example.ui.login;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.home.HomeActivity;
@@ -18,6 +20,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     Button buttonLogin, buttonSignup;
     EditText textEmail, textPass;
+    TextView termsAndConditions;
 
     @Override
     public int layout() {
@@ -31,6 +34,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         buttonSignup = getActivity().findViewById(R.id.button_signup);
         textEmail = getActivity().findViewById(R.id.text_mail);
         textPass = getActivity().findViewById(R.id.text_pass);
+        termsAndConditions = getActivity().findViewById(R.id.footer);
 
         getPresenter().attachView(this);
 
@@ -47,6 +51,13 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             @Override
             public void onClick(View view) {
                 getPresenter().onSignUpButtonClicked();
+            }
+        });
+
+        termsAndConditions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().onTermsAndConditionsClicked();
             }
         });
     }
@@ -82,5 +93,11 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void goHome() {
         Intent intent = new Intent(getContext(), HomeActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void goTermsAndConditions() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.terms_and_conditions)));
+        startActivity(browserIntent);
     }
 }
