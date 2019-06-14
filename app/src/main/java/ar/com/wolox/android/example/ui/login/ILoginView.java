@@ -5,13 +5,9 @@ package ar.com.wolox.android.example.ui.login;
  */
 
 interface ILoginView {
-    void setEmptyEmailPass(String emailReq, String passReq);
+    void setEmptyEmailPass();
 
-    void setInvalidEmail(String invEmail);
+    void setInvalidEmail();
 
-    void setEmptyPass(String passReq);
-
-    void setEmptyEmail(String emailReq);
-
-    void setCredentials(String email, String pass);
+    void showCredentials(String email, String pass);
 }
