@@ -63,6 +63,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         editor.putString(PASSWORD_KEY, pass);
 
         editor.apply();
+
+        getView().goHome();
     }
 
     /**
@@ -75,5 +77,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         String pass = sharedPreferences.getString(PASSWORD_KEY, "");
 
         getView().showCredentials(email, pass);
+
+        if (!email.isEmpty() && !pass.isEmpty()) {
+            getView().goHome();
+        }
+    }
+
+    public void onSignUpButtonClicked() {
+        getView().goSignUp();
     }
 }
