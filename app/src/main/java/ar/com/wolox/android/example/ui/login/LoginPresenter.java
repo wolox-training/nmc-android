@@ -2,25 +2,39 @@ package ar.com.wolox.android.example.ui.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+
+import ar.com.wolox.android.example.network.GetService;
+import ar.com.wolox.android.example.network.ServerComunication;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
+import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * LoginPresenter
  */
 
-public class LoginPresenter extends BasePresenter<ILoginView> {
+public class LoginPresenter extends BasePresenter<ILoginView> implements Callback<ServerComunication> {
 
     static final String SHARED_PREFERENCES = "MySharedPreferences";
     static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
     static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
+    static final String URL_SERVER = "";
+    String mTag = "Users: ";
+    RetrofitServices mRetrofitServices;
 
     @Inject
-    LoginPresenter() {}
+    LoginPresenter(RetrofitServices retrofitServices) {
+        this.mRetrofitServices = retrofitServices;
+    }
 
     /**
      * @param email String with the User Email
@@ -78,6 +92,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
         getView().showCredentials(email, pass);
 
+        new GetUsersThread().execute();
+
         if (!email.isEmpty() && !pass.isEmpty()) {
             getView().goHome();
         }
@@ -89,5 +105,32 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     public void onTermsAndConditionsClicked() {
         getView().goTermsAndConditions();
+    }
+
+    private void getUsersFromServer() {
+        mRetrofitServices.getService(GetService.class).getAllUsers().enqueue(this);
+    }
+
+    @Override
+    public void onResponse(Call<ServerComunication> call, Response<ServerComunication> response) {
+        ServerComunication serverComunication;
+        if (response.isSuccessful()) {
+            serverComunication = response.body();
+            Log.d(mTag, serverComunication.getUsers().get(0).getUsername());
+        }
+    }
+
+    @Override
+    public void onFailure(Call<ServerComunication> call, Throwable t) {
+        Log.d(mTag, "failed.");
+    }
+
+    class GetUsersThread extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            getUsersFromServer();
+            return null;
+        }
     }
 }
