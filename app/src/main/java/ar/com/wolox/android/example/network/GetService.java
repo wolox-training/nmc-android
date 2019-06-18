@@ -1,5 +1,7 @@
 package ar.com.wolox.android.example.network;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -8,6 +10,6 @@ import retrofit2.http.GET;
  */
 
 public interface GetService {
-    @GET("https://android-training.herokuapp.com/users")
-    Call<ServerComunication> getAllUsers();
+    @GET("/users")
+    Call<List<Users>> getAllUsers();
 }

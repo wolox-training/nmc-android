@@ -2,16 +2,15 @@ package ar.com.wolox.android.example.ui.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.util.Log;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
 import ar.com.wolox.android.example.network.GetService;
-import ar.com.wolox.android.example.network.ServerComunication;
+import ar.com.wolox.android.example.network.Users;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
 import retrofit2.Call;
@@ -22,14 +21,15 @@ import retrofit2.Response;
  * LoginPresenter
  */
 
-public class LoginPresenter extends BasePresenter<ILoginView> implements Callback<ServerComunication> {
+public class LoginPresenter extends BasePresenter<ILoginView> implements Callback<List<Users>> {
 
     static final String SHARED_PREFERENCES = "MySharedPreferences";
     static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
     static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
     static final String URL_SERVER = "";
-    String mTag = "Users: ";
     RetrofitServices mRetrofitServices;
+    String mEmail, mPassword;
+    List<Users> mUsers;
 
     @Inject
     LoginPresenter(RetrofitServices retrofitServices) {
@@ -43,8 +43,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
      */
     public void onLoginButtonClicked(String email, String pass, Context context) {
 
+        if (mUsers == null) {
+            getUsersFromServer();
+        }
+
         if (!email.isEmpty() && validFormat(email) && !pass.isEmpty()) {
-            saveCredentials(email, pass, context);
+            if (isEmailAndPasswordRegistered(email, pass)) {
+                saveCredentials(email, pass, context);
+            }
             return;
         }
 
@@ -90,9 +96,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
         String email = sharedPreferences.getString(EMAIL_KEY, "");
         String pass = sharedPreferences.getString(PASSWORD_KEY, "");
 
-        getView().showCredentials(email, pass);
+        getUsersFromServer();
 
-        new GetUsersThread().execute();
+        getView().showCredentials(email, pass);
 
         if (!email.isEmpty() && !pass.isEmpty()) {
             getView().goHome();
@@ -112,25 +118,23 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
     }
 
     @Override
-    public void onResponse(Call<ServerComunication> call, Response<ServerComunication> response) {
-        ServerComunication serverComunication;
+    public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
         if (response.isSuccessful()) {
-            serverComunication = response.body();
-            Log.d(mTag, serverComunication.getUsers().get(0).getUsername());
+            this.mUsers = response.body();
         }
     }
 
     @Override
-    public void onFailure(Call<ServerComunication> call, Throwable t) {
-        Log.d(mTag, "failed.");
+    public void onFailure(Call<List<Users>> call, Throwable t) {
+
     }
 
-    class GetUsersThread extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            getUsersFromServer();
-            return null;
+    private Boolean isEmailAndPasswordRegistered(String email, String pass) {
+        for (int i = 0; i < mUsers.size(); i++) {
+            if (email.equals(mUsers.get(i).getEmail()) && pass.equals(mUsers.get(i).getPassword())) {
+                return true;
+            }
         }
+        return false;
     }
 }
