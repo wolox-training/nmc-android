@@ -36,8 +36,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         textPass = getActivity().findViewById(R.id.text_pass);
         termsAndConditions = getActivity().findViewById(R.id.footer);
 
-        getPresenter().attachView(this);
-
         getPresenter().onInit(getContext());
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {

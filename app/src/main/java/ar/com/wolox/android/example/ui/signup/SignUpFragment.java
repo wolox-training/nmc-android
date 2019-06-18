@@ -16,6 +16,6 @@ public class SignUpFragment extends WolmoFragment<SignUpPresenter> implements IS
 
     @Override
     public void init() {
-        getPresenter().attachView(this);
+
     }
 }
