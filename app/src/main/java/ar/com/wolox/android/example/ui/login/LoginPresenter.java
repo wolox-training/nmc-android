@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import ar.com.wolox.android.example.network.GetService;
+import ar.com.wolox.android.example.network.GetCallsAPI;
 import ar.com.wolox.android.example.network.Users;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
@@ -113,7 +113,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
     }
 
     private void getUsersFromServer() {
-        mRetrofitServices.getService(GetService.class).getAllUsers().enqueue(this);
+        mRetrofitServices.getService(GetCallsAPI.class).getAllUsers().enqueue(this);
     }
 
     @Override
