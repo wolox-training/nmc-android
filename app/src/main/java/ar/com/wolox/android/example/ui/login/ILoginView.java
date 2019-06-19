@@ -12,4 +12,10 @@ interface ILoginView {
     void setInvalidEmailError();
 
     void showCredentials(String email, String pass);
+
+    void goSignUp();
+
+    void goHome();
+
+    void goTermsAndConditions();
 }
