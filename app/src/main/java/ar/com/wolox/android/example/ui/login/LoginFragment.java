@@ -18,9 +18,10 @@ import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
-    Button buttonLogin, buttonSignup;
-    EditText textEmail, textPass;
-    TextView termsAndConditions;
+    private Button mButtonLogin, mButtonSignup;
+    private EditText mTextEmail, mTextPass;
+    private TextView mTermsAndConditions;
+    private static final String URL = "http://www.wolox.com.ar";
 
     @Override
     public int layout() {
@@ -30,29 +31,29 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void init() {
 
-        buttonLogin = getActivity().findViewById(R.id.button_login);
-        buttonSignup = getActivity().findViewById(R.id.button_signup);
-        textEmail = getActivity().findViewById(R.id.text_mail);
-        textPass = getActivity().findViewById(R.id.text_pass);
-        termsAndConditions = getActivity().findViewById(R.id.footer);
+        mButtonLogin = getActivity().findViewById(R.id.button_login);
+        mButtonSignup = getActivity().findViewById(R.id.button_signup);
+        mTextEmail = getActivity().findViewById(R.id.text_mail);
+        mTextPass = getActivity().findViewById(R.id.text_pass);
+        mTermsAndConditions = getActivity().findViewById(R.id.footer);
 
         getPresenter().onInit(getContext());
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getPresenter().onLoginButtonClicked(textEmail.getText().toString(), textPass.getText().toString(), getContext());
+                getPresenter().onLoginButtonClicked(mTextEmail.getText().toString(), mTextPass.getText().toString(), getContext());
             }
         });
 
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
+        mButtonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getPresenter().onSignUpButtonClicked();
             }
         });
 
-        termsAndConditions.setOnClickListener(new View.OnClickListener() {
+        mTermsAndConditions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getPresenter().onTermsAndConditionsClicked();
@@ -62,23 +63,23 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void setEmptyEmailError() {
-        textEmail.setError(getString(R.string.email_required));
+        mTextEmail.setError(getString(R.string.email_required));
     }
 
     @Override
     public void setEmptyPassError() {
-        textPass.setError(getString(R.string.password_required));
+        mTextPass.setError(getString(R.string.password_required));
     }
 
     @Override
     public void setInvalidEmailError() {
-        textEmail.setError(getString(R.string.invalid_email));
+        mTextEmail.setError(getString(R.string.invalid_email));
     }
 
     @Override
     public void showCredentials(String email, String pass) {
-        textEmail.setText(email);
-        textPass.setText(pass);
+        mTextEmail.setText(email);
+        mTextPass.setText(pass);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void goTermsAndConditions() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.terms_and_conditions)));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         startActivity(browserIntent);
     }
 }
