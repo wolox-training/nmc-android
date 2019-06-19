@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.network;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,8 +9,8 @@ import java.util.List;
  */
 
 public class ServerComunication {
+
     @SerializedName("users")
-    @Expose
     private List<Users> users;
 
     public List<Users> getUsers() {
