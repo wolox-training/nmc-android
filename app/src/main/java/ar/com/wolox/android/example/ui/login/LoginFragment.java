@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import ar.com.wolox.android.R;
@@ -21,6 +22,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     private Button mButtonLogin, mButtonSignup;
     private EditText mTextEmail, mTextPass;
     private TextView mTermsAndConditions;
+    private ProgressBar mLoginProgressBar;
     private static final String URL = "http://www.wolox.com.ar";
 
     @Override
@@ -35,6 +37,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mButtonSignup = getActivity().findViewById(R.id.button_signup);
         mTextEmail = getActivity().findViewById(R.id.text_mail);
         mTextPass = getActivity().findViewById(R.id.text_pass);
+        mLoginProgressBar = getActivity().findViewById(R.id.loginProgressBar);
         mTermsAndConditions = getActivity().findViewById(R.id.footer);
 
         getPresenter().onInit(getContext());
@@ -98,5 +101,14 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void goTermsAndConditions() {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         startActivity(browserIntent);
+    }
+
+    @Override
+    public void waitUntilGetUsers() {
+        if (mLoginProgressBar.getVisibility() == View.INVISIBLE) {
+            mLoginProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mLoginProgressBar.setVisibility(View.INVISIBLE);
+        }
     }
 }

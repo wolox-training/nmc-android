@@ -18,4 +18,6 @@ interface ILoginView {
     void goHome();
 
     void goTermsAndConditions();
+
+    void waitUntilGetUsers();
 }

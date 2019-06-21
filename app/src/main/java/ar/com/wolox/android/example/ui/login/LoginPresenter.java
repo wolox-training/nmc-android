@@ -27,9 +27,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
     private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
     private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
     private static RetrofitServices mRetrofitServices;
-    private static String mEmail, mPassword;
-    private static Context mContext;
     private static List<Users> mUsers;
+    private static String mEmail = "", mPassword = "";
+    private Context mContext;
 
     @Inject
     LoginPresenter(RetrofitServices retrofitServices) {
@@ -43,27 +43,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
      */
     public void onLoginButtonClicked(String email, String pass, Context context) {
 
-        if (mUsers == null) {
-            getUsersFromServer();
-        }
+        mEmail = email;
+        mPassword = pass;
+        mContext = context;
 
-        if (!email.isEmpty() && validFormat(email) && !pass.isEmpty()) {
-            if (isEmailAndPasswordRegistered(email, pass)) {
-                saveCredentials(email, pass, context);
-            }
-            return;
-        }
-
-        if (email.isEmpty()) {
-            getView().setEmptyEmailError();
-        } else {
-            if (!validFormat(email)) {
-                getView().setInvalidEmailError();
-            }
-        }
-        if (pass.isEmpty()) {
-            getView().setEmptyPassError();
-        }
+        getUsersFromServer();
     }
 
     private boolean validFormat(String email) {
@@ -96,8 +80,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
         String email = sharedPreferences.getString(EMAIL_KEY, "");
         String pass = sharedPreferences.getString(PASSWORD_KEY, "");
 
-        getUsersFromServer();
-
         getView().showCredentials(email, pass);
 
         if (!email.isEmpty() && !pass.isEmpty()) {
@@ -114,22 +96,45 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
     }
 
     private void getUsersFromServer() {
+        getView().waitUntilGetUsers();
         mRetrofitServices.getService(GetCallsAPI.class).getAllUsers().enqueue(this);
     }
 
     @Override
     public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+        getView().waitUntilGetUsers();
         if (response.isSuccessful()) {
             this.mUsers = response.body();
+
+            if (!mEmail.isEmpty() && validFormat(mEmail) && !mPassword.isEmpty()) {
+                if (isEmailAndPasswordRegistered(mEmail, mPassword)) {
+                    saveCredentials(mEmail, mPassword, mContext);
+                }
+                return;
+            }
+
+            if (mEmail.isEmpty()) {
+                getView().setEmptyEmailError();
+            } else {
+                if (!validFormat(mEmail)) {
+                    getView().setInvalidEmailError();
+                }
+            }
+            if (mPassword.isEmpty()) {
+                getView().setEmptyPassError();
+            }
         }
     }
 
     @Override
     public void onFailure(Call<List<Users>> call, Throwable t) {
-
+        getView().waitUntilGetUsers();
     }
 
     private Boolean isEmailAndPasswordRegistered(String email, String pass) {
+        if (mUsers == null) {
+            return false;
+        }
         for (int i = 0; i < mUsers.size(); i++) {
             if (email.equals(mUsers.get(i).getEmail()) && pass.equals(mUsers.get(i).getPassword())) {
                 return true;
