@@ -26,9 +26,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
     private static final String SHARED_PREFERENCES = "MySharedPreferences";
     private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
     private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
-    private static RetrofitServices mRetrofitServices;
-    private static List<Users> mUsers;
-    private static String mEmail = "", mPassword = "";
+    private RetrofitServices mRetrofitServices;
+    private List<Users> mUsers;
+    private String mEmail = "", mPassword = "";
     private Context mContext;
 
     @Inject
