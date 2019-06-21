@@ -23,12 +23,13 @@ import retrofit2.Response;
 
 public class LoginPresenter extends BasePresenter<ILoginView> implements Callback<List<Users>> {
 
-    static final String SHARED_PREFERENCES = "MySharedPreferences";
-    static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
-    static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
-    RetrofitServices mRetrofitServices;
-    String mEmail, mPassword;
-    List<Users> mUsers;
+    private static final String SHARED_PREFERENCES = "MySharedPreferences";
+    private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
+    private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
+    private static RetrofitServices mRetrofitServices;
+    private static String mEmail, mPassword;
+    private static Context mContext;
+    private static List<Users> mUsers;
 
     @Inject
     LoginPresenter(RetrofitServices retrofitServices) {
