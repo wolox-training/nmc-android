@@ -23,5 +23,6 @@
     <string name="wrong_password">Wrong Password</string>
     <string name="wrong_email_passowrd">Wrong Email or Password</string>
     <string name="no_network_connection">Network Error</string>
+    <string name="unsuccessful_response">Unsuccessful Response</string>
 
 </resources>

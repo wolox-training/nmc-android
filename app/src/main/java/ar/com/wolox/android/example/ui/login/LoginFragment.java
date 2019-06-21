@@ -105,12 +105,18 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void waitUntilGetUsers() {
-        if (mLoginProgressBar.getVisibility() == View.INVISIBLE) {
-            mLoginProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            mLoginProgressBar.setVisibility(View.INVISIBLE);
-        }
+    public void startLoading() {
+        mLoginProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void completeLoading() {
+        mLoginProgressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void unsuccessfulResponse() {
+        Toast.makeText(getContext(), R.string.unsuccessful_response, Toast.LENGTH_SHORT).show();
     }
 
     @Override

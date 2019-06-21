@@ -9,7 +9,7 @@ import retrofit2.http.GET;
  * REST API Interface
  */
 
-public interface GetCallsAPI {
+public interface UserServices {
     @GET("/users")
     Call<List<Users>> getAllUsers();
 }
