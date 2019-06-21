@@ -19,5 +19,9 @@ interface ILoginView {
 
     void goTermsAndConditions();
 
-    void waitUntilGetUsers();
+    void startLoading();
+
+    void completeLoading();
+
+    void unsuccessfulResponse();
 }

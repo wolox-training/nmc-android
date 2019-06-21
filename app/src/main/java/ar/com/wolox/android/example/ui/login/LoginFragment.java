@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.home.HomeActivity;
@@ -104,11 +105,17 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void waitUntilGetUsers() {
-        if (mLoginProgressBar.getVisibility() == View.INVISIBLE) {
-            mLoginProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            mLoginProgressBar.setVisibility(View.INVISIBLE);
-        }
+    public void startLoading() {
+        mLoginProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void completeLoading() {
+        mLoginProgressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void unsuccessfulResponse() {
+        Toast.makeText(getContext(), R.string.unsuccessful_response, Toast.LENGTH_SHORT).show();
     }
 }
