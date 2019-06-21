@@ -3,11 +3,19 @@ package ar.com.wolox.android.example.ui.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+
+import ar.com.wolox.android.example.network.UserServices;
+import ar.com.wolox.android.example.network.Users;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
+import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * LoginPresenter
@@ -15,12 +23,18 @@ import ar.com.wolox.wolmo.core.presenter.BasePresenter;
 
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
-    static final String SHARED_PREFERENCES = "MySharedPreferences";
-    static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
-    static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
+    private static final String SHARED_PREFERENCES = "MySharedPreferences";
+    private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
+    private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
+    private RetrofitServices mRetrofitServices;
+    private List<Users> mUsers;
+    private String mEmail = "", mPassword = "";
+    private Context mContext;
 
     @Inject
-    LoginPresenter() {}
+    LoginPresenter(RetrofitServices retrofitServices) {
+        this.mRetrofitServices = retrofitServices;
+    }
 
     /**
      * @param email String with the User Email
@@ -29,21 +43,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      */
     public void onLoginButtonClicked(String email, String pass, Context context) {
 
-        if (!email.isEmpty() && validFormat(email) && !pass.isEmpty()) {
-            saveCredentials(email, pass, context);
-            return;
-        }
+        mEmail = email;
+        mPassword = pass;
+        mContext = context;
 
-        if (email.isEmpty()) {
-            getView().setEmptyEmailError();
-        } else {
-            if (!validFormat(email)) {
-                getView().setInvalidEmailError();
-            }
-        }
-        if (pass.isEmpty()) {
-            getView().setEmptyPassError();
-        }
+        getUsersFromServer();
     }
 
     private boolean validFormat(String email) {
@@ -89,5 +93,55 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     public void onTermsAndConditionsClicked() {
         getView().goTermsAndConditions();
+    }
+
+    private void getUsersFromServer() {
+        getView().startLoading();
+        mRetrofitServices.getService(UserServices.class).getAllUsers().enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                getView().completeLoading();
+                if (response.isSuccessful()) {
+                    mUsers = response.body();
+
+                    if (!mEmail.isEmpty() && validFormat(mEmail) && !mPassword.isEmpty()) {
+                        if (isEmailAndPasswordRegistered(mEmail, mPassword)) {
+                            saveCredentials(mEmail, mPassword, mContext);
+                        }
+                        return;
+                    }
+
+                    if (mEmail.isEmpty()) {
+                        getView().setEmptyEmailError();
+                    } else {
+                        if (!validFormat(mEmail)) {
+                            getView().setInvalidEmailError();
+                        }
+                    }
+                    if (mPassword.isEmpty()) {
+                        getView().setEmptyPassError();
+                    }
+                } else {
+                    getView().unsuccessfulResponse();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
+                getView().completeLoading();
+            }
+        });
+    }
+
+    private Boolean isEmailAndPasswordRegistered(String email, String pass) {
+        if (mUsers == null) {
+            return false;
+        }
+        for (int i = 0; i < mUsers.size(); i++) {
+            if (email.equals(mUsers.get(i).getEmail()) && pass.equals(mUsers.get(i).getPassword())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
