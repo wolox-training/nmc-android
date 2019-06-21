@@ -22,4 +22,6 @@ interface ILoginView {
     void waitUntilGetUsers();
 
     void setWrongEmailPassword(String email, String password);
+
+    void setNoNetworkConnection();
 }

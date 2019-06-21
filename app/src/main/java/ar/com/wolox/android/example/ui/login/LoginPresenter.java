@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.ui.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -46,6 +47,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
         mEmail = email;
         mPassword = pass;
         mContext = context;
+
+        if (!isNetworkConnected()) {
+            getView().setNoNetworkConnection();
+            return;
+        }
 
         getUsersFromServer();
     }
@@ -146,5 +152,10 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
         }
         getView().setWrongEmailPassword("", "");
         return false;
+    }
+
+    private Boolean isNetworkConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo() != null;
     }
 }
