@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.home.HomeActivity;
@@ -109,6 +110,16 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             mLoginProgressBar.setVisibility(View.VISIBLE);
         } else {
             mLoginProgressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void setWrongEmailPassword(String email, String password) {
+        if (!mTextEmail.getText().toString().equals(email) && !mTextPass.getText().toString().equals(password)) {
+            Toast.makeText(getContext(), R.string.wrong_email_passowrd, Toast.LENGTH_SHORT).show();
+        }
+        if (mTextEmail.getText().toString().equals(email) && !mTextPass.getText().toString().equals(password)) {
+            Toast.makeText(getContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -20,5 +20,7 @@
     <string name="email_required">Email is Required</string>
     <string name="password_required">Password is Required</string>
     <string name="invalid_email">Invalid Email</string>
+    <string name="wrong_password">Wrong Password</string>
+    <string name="wrong_email_passowrd">Wrong Email or Password</string>
 
 </resources>

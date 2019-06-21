@@ -139,7 +139,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements Callbac
             if (email.equals(mUsers.get(i).getEmail()) && pass.equals(mUsers.get(i).getPassword())) {
                 return true;
             }
+            if (email.equals(mUsers.get(i).getEmail()) && !pass.equals(mUsers.get(i).getPassword())) {
+                getView().setWrongEmailPassword(mUsers.get(i).getEmail(), mUsers.get(i).getPassword());
+                return false;
+            }
         }
+        getView().setWrongEmailPassword("", "");
         return false;
     }
 }
