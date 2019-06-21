@@ -18,4 +18,10 @@ interface ILoginView {
     void goHome();
 
     void goTermsAndConditions();
+
+    void startLoading();
+
+    void completeLoading();
+
+    void unsuccessfulResponse();
 }
