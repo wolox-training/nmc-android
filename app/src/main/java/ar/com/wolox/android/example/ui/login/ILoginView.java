@@ -19,7 +19,9 @@ interface ILoginView {
 
     void goTermsAndConditions();
 
-    void setWrongEmailPassword(String email, String password);
+    void setWrongEmailPassword();
+
+    void setWrongPassword();
 
     void setNoNetworkConnection();
 

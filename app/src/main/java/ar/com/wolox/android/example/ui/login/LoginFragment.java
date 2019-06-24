@@ -120,13 +120,13 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void setWrongEmailPassword(String email, String password) {
-        if (!mTextEmail.getText().toString().equals(email) && !mTextPass.getText().toString().equals(password)) {
-            Toast.makeText(getContext(), R.string.wrong_email_passowrd, Toast.LENGTH_SHORT).show();
-        }
-        if (mTextEmail.getText().toString().equals(email) && !mTextPass.getText().toString().equals(password)) {
-            Toast.makeText(getContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
-        }
+    public void setWrongEmailPassword() {
+        Toast.makeText(getContext(), R.string.wrong_email_passowrd, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setWrongPassword() {
+        Toast.makeText(getContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
     }
 
     @Override
