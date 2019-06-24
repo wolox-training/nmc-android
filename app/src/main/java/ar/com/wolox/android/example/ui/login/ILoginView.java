@@ -19,6 +19,12 @@ interface ILoginView {
 
     void goTermsAndConditions();
 
+    void setWrongEmailPassword();
+
+    void setWrongPassword();
+
+    void setNoNetworkConnection();
+
     void startLoading();
 
     void completeLoading();

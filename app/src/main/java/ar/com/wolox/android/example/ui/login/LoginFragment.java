@@ -118,4 +118,19 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void unsuccessfulResponse() {
         Toast.makeText(getContext(), R.string.unsuccessful_response, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void setWrongEmailPassword() {
+        Toast.makeText(getContext(), R.string.wrong_email_passowrd, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setWrongPassword() {
+        Toast.makeText(getContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setNoNetworkConnection() {
+        Toast.makeText(getContext(), R.string.no_network_connection, Toast.LENGTH_SHORT).show();
+    }
 }

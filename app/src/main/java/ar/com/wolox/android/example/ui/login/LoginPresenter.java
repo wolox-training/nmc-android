@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.ui.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -27,9 +28,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
     private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
     private RetrofitServices mRetrofitServices;
-    private List<Users> mUsers;
-    private String mEmail = "", mPassword = "";
-    private Context mContext;
 
     @Inject
     LoginPresenter(RetrofitServices retrofitServices) {
@@ -38,16 +36,17 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     /**
      * @param email String with the User Email
-     * @param pass String with the User Password
+     * @param password String with the User Password
      * @param context Context of LoginFragment
      */
-    public void onLoginButtonClicked(String email, String pass, Context context) {
+    public void onLoginButtonClicked(String email, String password, Context context) {
 
-        mEmail = email;
-        mPassword = pass;
-        mContext = context;
+        if (!isNetworkConnected(context)) {
+            getView().setNoNetworkConnection();
+            return;
+        }
 
-        getUsersFromServer();
+        getUsersFromServer(email, password, context);
     }
 
     private boolean validFormat(String email) {
@@ -59,12 +58,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         return matcher.matches();
     }
 
-    private void saveCredentials(String email, String pass, Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, context.MODE_PRIVATE);
+    private void saveCredentials(String email, String password, Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(EMAIL_KEY, email);
-        editor.putString(PASSWORD_KEY, pass);
+        editor.putString(PASSWORD_KEY, password);
 
         editor.apply();
 
@@ -75,14 +74,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * @param context Context of LoginFragment
      */
     public void onInit(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         String email = sharedPreferences.getString(EMAIL_KEY, "");
-        String pass = sharedPreferences.getString(PASSWORD_KEY, "");
+        String password = sharedPreferences.getString(PASSWORD_KEY, "");
 
-        getView().showCredentials(email, pass);
+        getView().showCredentials(email, password);
 
-        if (!email.isEmpty() && !pass.isEmpty()) {
+        if (!email.isEmpty() && !password.isEmpty()) {
             getView().goHome();
         }
     }
@@ -95,30 +94,30 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         getView().goTermsAndConditions();
     }
 
-    private void getUsersFromServer() {
+    private void getUsersFromServer(String email, String password, Context context) {
         getView().startLoading();
         mRetrofitServices.getService(UserServices.class).getAllUsers().enqueue(new Callback<List<Users>>() {
             @Override
             public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
                 getView().completeLoading();
                 if (response.isSuccessful()) {
-                    mUsers = response.body();
+                    List<Users> usersList = response.body();
 
-                    if (!mEmail.isEmpty() && validFormat(mEmail) && !mPassword.isEmpty()) {
-                        if (isEmailAndPasswordRegistered(mEmail, mPassword)) {
-                            saveCredentials(mEmail, mPassword, mContext);
+                    if (!email.isEmpty() && validFormat(email) && !password.isEmpty()) {
+                        if (isEmailAndPasswordRegistered(email, password, usersList)) {
+                            saveCredentials(email, password, context);
                         }
                         return;
                     }
 
-                    if (mEmail.isEmpty()) {
+                    if (email.isEmpty()) {
                         getView().setEmptyEmailError();
                     } else {
-                        if (!validFormat(mEmail)) {
+                        if (!validFormat(email)) {
                             getView().setInvalidEmailError();
                         }
                     }
-                    if (mPassword.isEmpty()) {
+                    if (password.isEmpty()) {
                         getView().setEmptyPassError();
                     }
                 } else {
@@ -133,15 +132,25 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         });
     }
 
-    private Boolean isEmailAndPasswordRegistered(String email, String pass) {
-        if (mUsers == null) {
+    private Boolean isEmailAndPasswordRegistered(String email, String pass, List<Users> usersList) {
+        if (usersList == null) {
             return false;
         }
-        for (int i = 0; i < mUsers.size(); i++) {
-            if (email.equals(mUsers.get(i).getEmail()) && pass.equals(mUsers.get(i).getPassword())) {
+        for (int i = 0; i < usersList.size(); i++) {
+            if (email.equals(usersList.get(i).getEmail()) && pass.equals(usersList.get(i).getPassword())) {
                 return true;
             }
+            if (email.equals(usersList.get(i).getEmail()) && !pass.equals(usersList.get(i).getPassword())) {
+                getView().setWrongPassword();
+                return false;
+            }
         }
+        getView().setWrongEmailPassword();
         return false;
+    }
+
+    private Boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo() != null;
     }
 }
