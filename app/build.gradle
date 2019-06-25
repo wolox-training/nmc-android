@@ -139,6 +139,8 @@ dependencies {
     // Testing dependencies
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-inline:$mockito_inline_version"
+    // Robolectric
+    testImplementation "org.robolectric:robolectric:3.3.2"
     // Mockito inline adds support for mocking final classes and methods
     testImplementation "org.assertj:assertj-core:$assertj_version"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
