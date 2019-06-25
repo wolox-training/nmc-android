@@ -47,7 +47,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mLoginProgressBar = getActivity().findViewById(R.id.loginProgressBar);
         mTermsAndConditions = getActivity().findViewById(R.id.footer);
 
-        getPresenter().onInit(getContext());
+        getPresenter().onInit(getContext(), EMAIL_KEY, PASSWORD_KEY, SHARED_PREFERENCES);
 
         mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,9 +16,6 @@ import ar.com.wolox.wolmo.core.presenter.BasePresenter;
 
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
-    private static final String SHARED_PREFERENCES = "MySharedPreferences";
-    private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
-    private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
     private LoginAdapterAPI loginAdapterAPI;
     private String mEmail;
     private String mPassword;
@@ -64,12 +61,15 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     /**
      * @param context Context of LoginFragment
+     * @param emailKey String
+     * @param passwordKey String
+     * @param sharedPrefKey String
      */
-    public void onInit(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+    public void onInit(Context context, String emailKey, String passwordKey, String sharedPrefKey) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE);
 
-        String email = sharedPreferences.getString(EMAIL_KEY, "");
-        String password = sharedPreferences.getString(PASSWORD_KEY, "");
+        String email = sharedPreferences.getString(emailKey, "");
+        String password = sharedPreferences.getString(passwordKey, "");
 
         getView().showCredentials(email, password);
 
