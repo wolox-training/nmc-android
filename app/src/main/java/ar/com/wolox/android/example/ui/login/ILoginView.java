@@ -4,7 +4,7 @@ package ar.com.wolox.android.example.ui.login;
  * LoginInterface
  */
 
-interface ILoginView {
+public interface ILoginView {
     void setEmptyEmailError();
 
     void setEmptyPassError();
@@ -21,8 +21,6 @@ interface ILoginView {
 
     void setWrongEmailPassword();
 
-    void setWrongPassword();
-
     void setNoNetworkConnection();
 
     void startLoading();
@@ -30,4 +28,6 @@ interface ILoginView {
     void completeLoading();
 
     void unsuccessfulResponse();
+
+    void saveCredentials(String mEmail, String mPassword);
 }

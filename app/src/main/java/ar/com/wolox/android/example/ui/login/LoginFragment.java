@@ -1,6 +1,9 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,9 @@ import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
+    private static final String SHARED_PREFERENCES = "MySharedPreferences";
+    private static final String EMAIL_KEY = "ar.com.wolox.android.example.emailCredential";
+    private static final String PASSWORD_KEY = "ar.com.wolox.android.example.passCredential";
     private Button mButtonLogin, mButtonSignup;
     private EditText mTextEmail, mTextPass;
     private TextView mTermsAndConditions;
@@ -41,12 +47,16 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mLoginProgressBar = getActivity().findViewById(R.id.loginProgressBar);
         mTermsAndConditions = getActivity().findViewById(R.id.footer);
 
-        getPresenter().onInit(getContext());
+        getPresenter().onInit(getContext(), EMAIL_KEY, PASSWORD_KEY, SHARED_PREFERENCES);
 
         mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getPresenter().onLoginButtonClicked(mTextEmail.getText().toString(), mTextPass.getText().toString(), getContext());
+                if (!isNetworkConnected()) {
+                    setNoNetworkConnection();
+                    return;
+                }
+                getPresenter().onLoginButtonClicked(mTextEmail.getText().toString(), mTextPass.getText().toString());
             }
         });
 
@@ -125,12 +135,23 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void setWrongPassword() {
-        Toast.makeText(getContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
+    public void setNoNetworkConnection() {
+        Toast.makeText(getContext(), R.string.no_network_connection, Toast.LENGTH_SHORT).show();
+    }
+
+    private Boolean isNetworkConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo() != null;
     }
 
     @Override
-    public void setNoNetworkConnection() {
-        Toast.makeText(getContext(), R.string.no_network_connection, Toast.LENGTH_SHORT).show();
+    public void saveCredentials(String email, String password) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(EMAIL_KEY, email);
+        editor.putString(PASSWORD_KEY, password);
+
+        editor.apply();
     }
 }
