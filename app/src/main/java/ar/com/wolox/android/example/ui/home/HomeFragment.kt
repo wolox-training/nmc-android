@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.home
 
-import androidx.fragment.app.Fragment
 import androidx.core.util.Pair
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.ui.home.news.NewsFragment
@@ -26,11 +25,14 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
     }
 
     override fun init() {
+        vTabLayoutFragmentHome.setupWithViewPager(vViewPagerFragmentHome)
+
         fragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
         fragmentHomePagerAdapter.addFragments(
-                Pair<Fragment, String>(page1news, "New's Page"),
-                Pair<Fragment, String>(page2profile, "Profile's Page")
+                Pair(page1news, "News"),
+                Pair(page2profile, "Profile")
         )
+
         vViewPagerFragmentHome.adapter = fragmentHomePagerAdapter
     }
 }

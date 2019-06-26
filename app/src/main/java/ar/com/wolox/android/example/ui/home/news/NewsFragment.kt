@@ -12,6 +12,5 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun init() {
-        vToolbarNews.title = "News"
     }
 }

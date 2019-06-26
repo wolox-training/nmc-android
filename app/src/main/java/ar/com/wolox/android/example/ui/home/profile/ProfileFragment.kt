@@ -11,6 +11,5 @@ class ProfileFragment @Inject constructor() : WolmoFragment<ProfilePresenter>(),
     }
 
     override fun init() {
-        vToolbarProfile.title = "Profile"
     }
 }
