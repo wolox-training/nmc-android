@@ -9,6 +9,7 @@ import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import javax.inject.Inject
 
 /**
@@ -17,34 +18,43 @@ import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
 
-    @Inject internal lateinit var page1news: NewsFragment
-    @Inject internal lateinit var page2profile: ProfileFragment
-    private lateinit var fragmentHomePagerAdapter: SimpleFragmentPagerAdapter
+    @Inject internal lateinit var mPageNews: NewsFragment
+    @Inject internal lateinit var mPageProfile: ProfileFragment
+    private lateinit var mFragmentHomePagerAdapter: SimpleFragmentPagerAdapter
 
     override fun layout(): Int {
         return R.layout.fragment_home
     }
 
     override fun init() {
-        vToolbarFragmentHome.setLogo(R.drawable.wolox_logo)
-        vToolbarFragmentHome.setTitle(R.string.example_wolox)
+        vToolbarFragmentHome.apply {
+            setLogo(R.drawable.wolox_logo)
+            setTitle(R.string.example_wolox)
+        }
 
-        vTabLayoutFragmentHome.setupWithViewPager(vViewPagerFragmentHome)
+        vTabLayoutFragmentHome.apply {
+            setupWithViewPager(vViewPagerFragmentHome)
+            addTab(newTab().setText("News"))
+            addTab(newTab().setText("Profile"))
+            getTabAt(0)!!.setIcon(R.drawable.ic_news_list_on)
+            getTabAt(1)!!.setIcon(R.drawable.ic_profile_off)
+        }
 
-        fragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
-        fragmentHomePagerAdapter.addFragments(
-                Pair(page1news, "News"),
-                Pair(page2profile, "Profile")
-        )
-        vViewPagerFragmentHome.adapter = fragmentHomePagerAdapter
+        mFragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
 
-        vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_on)
-        vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_off)
+        mFragmentHomePagerAdapter.apply {
+            addFragments(
+                    Pair(mPageNews, "News"),
+                    Pair(mPageProfile, "Profile")
+            )
+        }
 
-        onTabView()
+        vViewPagerFragmentHome.adapter = mFragmentHomePagerAdapter
+
+        onTabInit()
     }
 
-    private fun onTabView() {
+    private fun onTabInit() {
         vViewPagerFragmentHome.addOnPageChangeListener(
                 TabLayout.TabLayoutOnPageChangeListener(vTabLayoutFragmentHome))
         vTabLayoutFragmentHome.addOnTabSelectedListener(object :
