@@ -9,7 +9,6 @@ import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import javax.inject.Inject
 
 /**
@@ -27,18 +26,14 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
     }
 
     override fun init() {
+
         vToolbarFragmentHome.apply {
             setLogo(R.drawable.wolox_logo)
             setTitle(R.string.example_wolox)
         }
 
         vTabLayoutFragmentHome.apply {
-            setupWithViewPager(vViewPagerFragmentHome)
-            addTab(newTab().setText("News"))
-            addTab(newTab().setText("Profile"))
-            getTabAt(0)!!.setIcon(R.drawable.ic_news_list_on)
-            getTabAt(1)!!.setIcon(R.drawable.ic_profile_off)
-        }
+        }.setupWithViewPager(vViewPagerFragmentHome)
 
         mFragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
 
@@ -49,31 +44,24 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
             )
         }
 
-        vViewPagerFragmentHome.adapter = mFragmentHomePagerAdapter
+        vViewPagerFragmentHome.apply {
+            adapter = mFragmentHomePagerAdapter
+            addOnPageChangeListener(
+                    TabLayout.TabLayoutOnPageChangeListener(vTabLayoutFragmentHome)
+            )
+        }
 
-        onTabInit()
+        onTabIconSelected()
     }
 
-    private fun onTabInit() {
-        vViewPagerFragmentHome.addOnPageChangeListener(
-                TabLayout.TabLayoutOnPageChangeListener(vTabLayoutFragmentHome))
-        vTabLayoutFragmentHome.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-                if (vTabLayoutFragmentHome.getTabAt(0)?.isSelected!!) {
-                    vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_on)
-                    vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_off)
-                } else {
-                    vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_off)
-                    vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_on)
-                }
-            }
+    private fun onTabIconSelected() {
 
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-        })
+        if (vTabLayoutFragmentHome.getTabAt(0)?.isSelected!!) {
+            vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
+            vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+        } else {
+            vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
+            vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+        }
     }
 }
