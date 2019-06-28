@@ -17,53 +17,51 @@ import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
 
-    @Inject internal lateinit var page1news: NewsFragment
-    @Inject internal lateinit var page2profile: ProfileFragment
-    private lateinit var fragmentHomePagerAdapter: SimpleFragmentPagerAdapter
+    @Inject internal lateinit var mPageNews: NewsFragment
+    @Inject internal lateinit var mPageProfile: ProfileFragment
+    private lateinit var mFragmentHomePagerAdapter: SimpleFragmentPagerAdapter
 
     override fun layout(): Int {
         return R.layout.fragment_home
     }
 
     override fun init() {
-        vToolbarFragmentHome.setLogo(R.drawable.wolox_logo)
-        vToolbarFragmentHome.setTitle(R.string.example_wolox)
 
-        vTabLayoutFragmentHome.setupWithViewPager(vViewPagerFragmentHome)
+        vToolbarFragmentHome.apply {
+            setLogo(R.drawable.wolox_logo)
+            setTitle(R.string.example_wolox)
+        }
 
-        fragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
-        fragmentHomePagerAdapter.addFragments(
-                Pair(page1news, "News"),
-                Pair(page2profile, "Profile")
-        )
-        vViewPagerFragmentHome.adapter = fragmentHomePagerAdapter
+        vTabLayoutFragmentHome.apply {
+        }.setupWithViewPager(vViewPagerFragmentHome)
 
-        vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_on)
-        vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_off)
+        mFragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
 
-        onTabView()
+        mFragmentHomePagerAdapter.apply {
+            addFragments(
+                    Pair(mPageNews, "News"),
+                    Pair(mPageProfile, "Profile")
+            )
+        }
+
+        vViewPagerFragmentHome.apply {
+            adapter = mFragmentHomePagerAdapter
+            addOnPageChangeListener(
+                    TabLayout.TabLayoutOnPageChangeListener(vTabLayoutFragmentHome)
+            )
+        }
+
+        onTabIconSelected()
     }
 
-    private fun onTabView() {
-        vViewPagerFragmentHome.addOnPageChangeListener(
-                TabLayout.TabLayoutOnPageChangeListener(vTabLayoutFragmentHome))
-        vTabLayoutFragmentHome.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-                if (vTabLayoutFragmentHome.getTabAt(0)?.isSelected!!) {
-                    vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_on)
-                    vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_off)
-                } else {
-                    vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_off)
-                    vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_on)
-                }
-            }
+    private fun onTabIconSelected() {
 
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-        })
+        if (vTabLayoutFragmentHome.getTabAt(0)?.isSelected!!) {
+            vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
+            vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+        } else {
+            vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
+            vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+        }
     }
 }
