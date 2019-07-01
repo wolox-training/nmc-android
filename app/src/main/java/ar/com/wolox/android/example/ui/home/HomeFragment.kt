@@ -32,12 +32,15 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
             setTitle(R.string.example_wolox)
         }
 
-        vTabLayoutFragmentHome.setupWithViewPager(vViewPagerFragmentHome)
+        vTabLayoutFragmentHome.apply {
+        }.setupWithViewPager(vViewPagerFragmentHome)
 
-        mFragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager).apply {
+        mFragmentHomePagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
+
+        mFragmentHomePagerAdapter.apply {
             addFragments(
-                Pair(mPageNews, "News"),
-                Pair(mPageProfile, "Profile")
+                    Pair(mPageNews, "News"),
+                    Pair(mPageProfile, "Profile")
             )
         }
 
@@ -52,7 +55,13 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
     }
 
     private fun onTabIconSelected() {
-        vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
-        vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+
+        if (vTabLayoutFragmentHome.getTabAt(0)?.isSelected!!) {
+            vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
+            vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+        } else {
+            vTabLayoutFragmentHome.getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
+            vTabLayoutFragmentHome.getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
+        }
     }
 }
