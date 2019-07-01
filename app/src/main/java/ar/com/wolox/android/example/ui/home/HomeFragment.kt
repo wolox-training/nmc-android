@@ -48,10 +48,10 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
             )
         }
 
-        onTabIconSelected()
+        onTabInit()
     }
 
-    private fun onTabIconSelected() {
+    private fun onTabInit() {
         vTabLayoutFragmentHome.run {
             getTabAt(0)!!.setIcon(R.drawable.ic_news_list_selected_state)
             getTabAt(1)!!.setIcon(R.drawable.ic_profile_selected_state)
