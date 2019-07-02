@@ -1,22 +1,39 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.net.Uri
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ar.com.wolox.android.R
+import com.facebook.drawee.view.SimpleDraweeView
+import kotlinx.android.synthetic.main.item_news.view.*
 
-class NewsDataAdapter(private val newsDataAdapter: Array<String>) : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
+class NewsDataAdapter(
+    private val newsDataList: ArrayList<String>
+)
+    : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
 
-    class NewsViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsDataAdapter.NewsViewHolder {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val contactName = itemView.news_name
+        val draweeView: SimpleDraweeView = itemView.news_image
     }
 
-    override fun getItemCount(): Int {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+        val mNewsView = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_news, parent, false)
+
+        return NewsViewHolder(mNewsView)
     }
 
-    override fun onBindViewHolder(holder: NewsDataAdapter.NewsViewHolder, position: Int) {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+        val uri = Uri.parse("https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg")
+
+        holder.apply {
+            contactName.text = newsDataList[position]
+            draweeView.setImageURI(uri)
+        }
     }
+
+    override fun getItemCount() = newsDataList.size
 }

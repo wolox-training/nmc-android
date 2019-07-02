@@ -135,6 +135,7 @@ dependencies {
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck_version"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+    implementation 'com.facebook.fresco:fresco:2.0.0'
 
     // Testing dependencies
     testImplementation "junit:junit:$junit_version"
