@@ -7,4 +7,8 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
 
     override fun onViewAttached() {
     }
+
+    fun addNewsPressed() {
+        view.goAddNews()
+    }
 }

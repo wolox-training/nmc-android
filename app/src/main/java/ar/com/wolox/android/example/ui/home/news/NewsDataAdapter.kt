@@ -20,16 +20,16 @@ class NewsDataAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val mNewsView = LayoutInflater.from(parent.context)
+        val newsHolder = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_news, parent, false)
 
-        return NewsViewHolder(mNewsView)
+        return NewsViewHolder(newsHolder)
     }
 
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+    override fun onBindViewHolder(newsHolder: NewsViewHolder, position: Int) {
         val uri = Uri.parse("https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg")
 
-        holder.apply {
+        newsHolder.apply {
             contactName.text = newsDataList[position]
             draweeView.setImageURI(uri)
         }

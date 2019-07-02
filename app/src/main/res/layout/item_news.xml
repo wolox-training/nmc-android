@@ -63,14 +63,20 @@
         android:text="15m"
         android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/message_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+    <ImageButton
+        android:id="@+id/like_icon"
+        android:layout_width="35dp"
+        android:layout_height="33dp"
         android:layout_below="@+id/news_time"
         android:layout_alignEnd="@+id/frame_layout"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/news_description" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="22dp"
+        android:layout_toEndOf="@+id/news_description"
+        android:background="#00FFFFFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_like_off" />
 
     <View
         android:id="@+id/divider"

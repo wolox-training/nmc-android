@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
@@ -9,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_news.*
 import javax.inject.Inject
 
 class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INewsView {
+
     private lateinit var mNewsDataList: ArrayList<String>
     private lateinit var mViewAdapter: RecyclerView.Adapter<*>
     private lateinit var mViewManager: RecyclerView.LayoutManager
@@ -31,11 +33,19 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
             layoutManager = mViewManager
             adapter = mViewAdapter
         }
+
+        fab_icon.setOnClickListener {
+            presenter.addNewsPressed()
+        }
     }
 
     private fun addContacts() {
         for (i in 0..9) {
             mNewsDataList.add("Contact: $i")
         }
+    }
+
+    override fun goAddNews() {
+        Toast.makeText(context, "Add News", Toast.LENGTH_SHORT).show()
     }
 }
