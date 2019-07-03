@@ -2,8 +2,8 @@ package ar.com.wolox.android.example.di
 
 import ar.com.wolox.android.example.ui.home.HomeActivity
 import ar.com.wolox.android.example.ui.home.HomeFragment
-import ar.com.wolox.android.example.ui.home.news.NewsCreationActivity
-import ar.com.wolox.android.example.ui.home.news.NewsCreationFragment
+import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationActivity
+import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationFragment
 import ar.com.wolox.android.example.ui.home.news.NewsFragment
 import ar.com.wolox.android.example.ui.home.profile.ProfileFragment
 import ar.com.wolox.android.example.ui.login.LoginActivity

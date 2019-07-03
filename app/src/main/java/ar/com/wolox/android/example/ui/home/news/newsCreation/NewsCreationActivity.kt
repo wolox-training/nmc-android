@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.home.news
+package ar.com.wolox.android.example.ui.home.news.newsCreation
 
 import ar.com.wolox.android.R
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
