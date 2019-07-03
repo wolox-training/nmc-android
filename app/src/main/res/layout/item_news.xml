@@ -73,10 +73,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="22dp"
         android:layout_toEndOf="@+id/news_description"
-        android:background="#00FFFFFF"
+        android:background="@drawable/ic_like_selected_state"
         android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_like_off" />
+        android:focusable="true"/>
 
     <View
         android:id="@+id/divider"

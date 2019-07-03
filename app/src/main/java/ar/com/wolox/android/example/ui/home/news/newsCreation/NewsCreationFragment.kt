@@ -1,10 +1,9 @@
-package ar.com.wolox.android.example.ui.home.news
+package ar.com.wolox.android.example.ui.home.news.newsCreation
 
 import ar.com.wolox.android.R
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import javax.inject.Inject
 
-class NewsCreationFragment @Inject constructor() : WolmoFragment<NewsPresenter>() {
+class NewsCreationFragment : WolmoFragment<NewsCreationPresenter>(), INewsCreationView {
 
     override fun layout(): Int = R.layout.fragment_news_creation
 

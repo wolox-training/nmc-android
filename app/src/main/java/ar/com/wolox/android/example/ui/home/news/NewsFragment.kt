@@ -1,8 +1,10 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
+import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -45,5 +47,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun goAddNews() {
+        val intent = Intent(context, NewsCreationActivity::class.java)
+        startActivity(intent)
     }
 }
