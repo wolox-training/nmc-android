@@ -25,7 +25,6 @@
         android:layout_marginStart="336dp"
         android:layout_marginTop="-74dp"
         android:clickable="true"
-        android:focusable="true"
-        tools:srcCompat="@android:drawable/btn_plus" />
+        android:focusable="true"/>
 
 </RelativeLayout>
