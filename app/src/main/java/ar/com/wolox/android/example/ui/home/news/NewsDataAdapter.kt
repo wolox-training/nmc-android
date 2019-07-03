@@ -4,10 +4,12 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import com.facebook.drawee.view.SimpleDraweeView
 import kotlinx.android.synthetic.main.item_news.view.*
+import kotlin.collections.ArrayList
 
 class NewsDataAdapter(
     private val newsDataList: ArrayList<String>
@@ -17,6 +19,7 @@ class NewsDataAdapter(
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactName = itemView.news_name
         val draweeView: SimpleDraweeView = itemView.news_image
+        val newsTime: TextView = itemView.news_time
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
