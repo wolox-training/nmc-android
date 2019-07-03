@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,5 +48,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     override fun goAddNews() {
         Toast.makeText(context, "Add News", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, NewsCreationActivity::class.java)
+        startActivity(intent)
     }
 }
