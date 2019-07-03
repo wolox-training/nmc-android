@@ -1,6 +1,7 @@
 package ar.com.wolox.android.example.ui.home.news
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
@@ -27,7 +28,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         addContacts()
 
         mViewManager = LinearLayoutManager(context)
-        mViewAdapter = NewsDataAdapter(mNewsDataList, context)
+        mViewAdapter = NewsDataAdapter(mNewsDataList)
 
         vRecyclerViewNews.apply {
             setHasFixedSize(true)
@@ -37,6 +38,10 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
         fab_icon.setOnClickListener {
             presenter.addNewsPressed()
+        }
+
+        vSwipeRefreshLayout.setOnRefreshListener {
+            presenter.onRefresh()
         }
     }
 
@@ -49,5 +54,10 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun goAddNews() {
         val intent = Intent(context, NewsCreationActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun nothingNewToShow() {
+        vSwipeRefreshLayout.isRefreshing = false
+        Toast.makeText(context, "Nothing New", Toast.LENGTH_SHORT).show()
     }
 }

@@ -47,7 +47,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/news_image"
-        android:text="Lorem ipsum dolormet etc etc no se que mas poner de ejemplo acá."
+        android:text="@string/example_message"
         android:textSize="@dimen/font_medium_more" />
 
     <TextView

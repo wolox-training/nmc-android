@@ -15,21 +15,16 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <FrameLayout
-        android:id="@+id/vFrameLayoutFragmentHome"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/vTabLayoutFragmentHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/vTabLayoutFragmentHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vViewPagerFragmentHome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="70dp" />
-    </FrameLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vViewPagerFragmentHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>

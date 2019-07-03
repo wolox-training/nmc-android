@@ -11,4 +11,8 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
     fun addNewsPressed() {
         view.goAddNews()
     }
+
+    fun onRefresh() {
+        view.nothingNewToShow()
+    }
 }
