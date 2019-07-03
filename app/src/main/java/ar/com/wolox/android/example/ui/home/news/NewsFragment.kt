@@ -27,7 +27,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         addContacts()
 
         mViewManager = LinearLayoutManager(context)
-        mViewAdapter = NewsDataAdapter(mNewsDataList)
+        mViewAdapter = NewsDataAdapter(mNewsDataList, context)
 
         vRecyclerViewNews.apply {
             setHasFixedSize(true)

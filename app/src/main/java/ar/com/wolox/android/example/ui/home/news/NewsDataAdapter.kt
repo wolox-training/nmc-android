@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,8 @@ import com.facebook.drawee.view.SimpleDraweeView
 import kotlinx.android.synthetic.main.item_news.view.*
 
 class NewsDataAdapter(
-    private val newsDataList: ArrayList<String>
+    private val newsDataList: ArrayList<String>,
+    private val context: Context?
 )
     : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
 
