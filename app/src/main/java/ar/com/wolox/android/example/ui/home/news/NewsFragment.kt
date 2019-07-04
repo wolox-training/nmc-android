@@ -45,6 +45,10 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
     }
 
+    /**
+     * This function will be removed when we get
+     * the current news from the server.
+     */
     private fun addContacts() {
         for (i in 0..9) {
             mNewsDataList.add("Contact: $i")
