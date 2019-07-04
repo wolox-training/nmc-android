@@ -58,6 +58,6 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     override fun nothingNewToShow() {
         vSwipeRefreshLayout.isRefreshing = false
-        Toast.makeText(context, "Nothing New", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
     }
 }
