@@ -18,15 +18,17 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_icon"
-        android:layout_width="@dimen/news_fab_width_and_height"
-        android:layout_height="@dimen/news_fab_width_and_height"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/vRecyclerViewNews"
-        android:layout_margin="@dimen/static_spacing_large"
-        android:clickable="true"
-        android:focusable="true"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_icon"
+            android:layout_width="@dimen/news_fab_width_and_height"
+            android:layout_height="@dimen/news_fab_width_and_height"
+            android:layout_alignEnd="@+id/vRecyclerViewNews"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/static_spacing_large"
+            android:layout_marginBottom="@dimen/static_spacing_large"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_add" />
 
     </RelativeLayout>
 
