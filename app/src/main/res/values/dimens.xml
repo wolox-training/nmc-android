@@ -46,4 +46,7 @@
     <dimen name="font_huge">24sp</dimen>
 
     <!-- Add your custom dimens here -->
+
+    <!-- FAB -->
+    <dimen name="news_fab_width_and_height">70dp</dimen>
 </resources>
