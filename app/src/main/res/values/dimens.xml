@@ -49,4 +49,20 @@
 
     <!-- FAB -->
     <dimen name="news_fab_width_and_height">70dp</dimen>
+
+    <!-- Item News -->
+    <dimen name="news_general_margin_top">20dp</dimen>
+    <dimen name="news_image_width_and_height">60dp</dimen>
+    <dimen name="news_image_round_corner">2dp</dimen>
+    <dimen name="news_image_margins">16dp</dimen>
+    <dimen name="news_name_width">230dp</dimen>
+    <dimen name="news_name_margin_start">10dp</dimen>
+    <dimen name="news_description_height">50dp</dimen>
+    <dimen name="news_time_width">87dp</dimen>
+    <dimen name="news_togglebutton_width_and_height">35dp</dimen>
+    <dimen name="news_togglebutton_margin_start_and_end">23dp</dimen>
+    <dimen name="news_togglebutton_margin_top">10dp</dimen>
+    <dimen name="news_divider_height">1dp</dimen>
+    <dimen name="news_divider_margin_bottom">-8dp</dimen>
+
 </resources>

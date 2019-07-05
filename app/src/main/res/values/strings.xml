@@ -30,6 +30,7 @@
     <!-- Home -->
     <string name="nothing_new_to_show">Nothing New</string>
     <string name="toolbar_wolox_home">Wolox - Home</string>
+    <string name="example_news_time">15m</string>
 
     <!-- News Creation -->
     <string name="toolbar_wolox_news_creation">Wolox - News Creation</string>
