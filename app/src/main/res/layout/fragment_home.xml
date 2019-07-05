@@ -7,13 +7,10 @@
     android:orientation="vertical"
     android:id="@+id/vFragmentHome">
 
-    <androidx.appcompat.widget.Toolbar
+    <ar.com.wolox.android.example.ui.customView.CustomToolbar
         android:id="@+id/vToolbarFragmentHome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:layout_height="@dimen/spacing_largest_extra"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/vTabLayoutFragmentHome"

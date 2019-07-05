@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <ar.com.wolox.android.example.ui.customView.CustomToolbar
+        android:id="@+id/vToolbarNewsCreation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_largest_extra">
 
