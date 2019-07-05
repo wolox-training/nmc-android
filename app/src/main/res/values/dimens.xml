@@ -51,6 +51,7 @@
     <dimen name="news_fab_width_and_height">70dp</dimen>
 
     <!-- Item News -->
+    <dimen name="news_items_height">100dp</dimen>
     <dimen name="news_general_margin_top">20dp</dimen>
     <dimen name="news_image_width_and_height">60dp</dimen>
     <dimen name="news_image_round_corner">2dp</dimen>
