@@ -32,11 +32,11 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         fab_icon.setOnClickListener {
-            presenter.addNewsPressed()
+            presenter.onAddNewsButtonPressed()
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
-            presenter.onRefresh()
+            presenter.onPullDownRefresh()
         }
     }
 

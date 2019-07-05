@@ -12,7 +12,7 @@ import kotlin.collections.ArrayList
 
 class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
 
-    val uri = Uri.parse("https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg")
+    private val uri = Uri.parse(imageURL)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val newsHolder = LayoutInflater.from(parent.context)
@@ -22,7 +22,7 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
     }
 
     override fun onBindViewHolder(newsHolder: NewsViewHolder, position: Int) {
-        newsHolder.apply {
+        newsHolder.run {
             contactName.text = newsDataList[position]
             draweeView.setImageURI(uri)
         }
@@ -33,5 +33,9 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactName = itemView.news_name
         val draweeView: SimpleDraweeView = itemView.news_image
+    }
+
+    companion object {
+        private const val imageURL = "https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg"
     }
 }
