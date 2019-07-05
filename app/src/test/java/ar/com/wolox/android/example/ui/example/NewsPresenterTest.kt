@@ -22,13 +22,13 @@ class NewsPresenterTest {
 
     @Test
     fun showNewsCreationView() {
-        mNewsPresenter.addNewsPressed()
+        mNewsPresenter.onAddNewsButtonPressed()
         verify(mINewsView, times(1)).goAddNews()
     }
 
     @Test
     fun showNothingNewNotification() {
-        mNewsPresenter.onRefresh()
+        mNewsPresenter.onPullDownRefresh()
         verify(mINewsView, times(1)).nothingNewToShow()
     }
 }
