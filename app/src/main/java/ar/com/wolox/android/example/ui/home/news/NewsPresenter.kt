@@ -11,6 +11,11 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
 
     fun onPullDownRefresh() = view.nothingNewToShow()
 
+    /**
+     * This function is temporal,
+     * and only add as much as
+     * newsToRefresh's value.
+     */
     fun loadMoreNews(newsToRefresh: Int): ArrayList<String> {
         val oldNews = ArrayList<String>()
         for (i in 0..newsToRefresh) {
@@ -19,9 +24,13 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
         return oldNews
     }
 
+    /**
+     * This function is temporal,
+     * and puts only 2 news at the top.
+     */
     fun loadRecentNews() {
         val recentNews = ArrayList<String>()
-        for (i in 0..2) {
+        for (i in 1..2) {
             recentNews.add("Contact: " + 2)
         }
         view.addRecentNews(recentNews)
