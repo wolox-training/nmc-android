@@ -49,9 +49,15 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
+            val recentNews = presenter.loadRecentNews()
             vSwipeRefreshLayout.isRefreshing = false
-            newsDataList.addAll(0, presenter.loadMoreNews(2))
-            viewAdapter.notifyDataSetChanged()
+
+            if (recentNews.isEmpty()) {
+                nothingNewToShow()
+            } else {
+                newsDataList.addAll(0, recentNews)
+                viewAdapter.notifyDataSetChanged()
+            }
         }
     }
 
