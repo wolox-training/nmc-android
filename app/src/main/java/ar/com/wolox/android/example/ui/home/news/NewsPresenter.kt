@@ -9,8 +9,6 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
 
     fun onAddNewsButtonPressed() = view.goAddNews()
 
-    fun onPullDownRefresh() = view.nothingNewToShow()
-
     /**
      * This function is temporal,
      * and only add as much as

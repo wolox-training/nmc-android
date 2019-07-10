@@ -25,10 +25,4 @@ class NewsPresenterTest {
         mNewsPresenter.onAddNewsButtonPressed()
         verify(mINewsView, times(1)).goAddNews()
     }
-
-    @Test
-    fun showNothingNewNotification() {
-        mNewsPresenter.onPullDownRefresh()
-        verify(mINewsView, times(1)).nothingNewToShow()
-    }
 }
