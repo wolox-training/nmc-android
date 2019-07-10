@@ -14,16 +14,16 @@ class CustomToolbar @JvmOverloads constructor(
 
     init {
         setBackgroundColor(Color.TRANSPARENT)
-        setLogo(woloxIcon)
-        title = woloxTitle
+        setLogo(WOLOX_ICON)
+        title = WOLOX_TITLE
     }
 
     fun setCustomTitle(customTitle: String) {
-        title = "$woloxTitle - $customTitle"
+        title = "$WOLOX_TITLE - $customTitle"
     }
 
     companion object {
-        private const val woloxIcon = R.drawable.wolox_logo
-        private const val woloxTitle = "Wolox"
+        private const val WOLOX_ICON = R.drawable.wolox_logo
+        private const val WOLOX_TITLE = "Wolox"
     }
 }
