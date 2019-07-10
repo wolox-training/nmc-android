@@ -23,7 +23,7 @@ class CustomToolbar @JvmOverloads constructor(
     }
 
     companion object {
-        private val woloxIcon = R.drawable.wolox_logo
-        private val woloxTitle = "Wolox"
+        private const val woloxIcon = R.drawable.wolox_logo
+        private const val woloxTitle = "Wolox"
     }
 }
