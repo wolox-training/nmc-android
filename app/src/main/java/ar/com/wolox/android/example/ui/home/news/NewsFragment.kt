@@ -49,7 +49,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
-            presenter.onPullDownRefresh()
+            vSwipeRefreshLayout.isRefreshing = false
+            newsDataList.addAll(0, presenter.loadMoreNews(2))
+            viewAdapter.notifyDataSetChanged()
         }
     }
 
