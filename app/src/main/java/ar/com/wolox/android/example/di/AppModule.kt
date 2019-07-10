@@ -5,6 +5,8 @@ import ar.com.wolox.android.example.ui.home.HomeFragment
 import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationActivity
 import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationFragment
 import ar.com.wolox.android.example.ui.home.news.NewsFragment
+import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewActivity
+import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewFragment
 import ar.com.wolox.android.example.ui.home.profile.ProfileFragment
 import ar.com.wolox.android.example.ui.login.LoginActivity
 import ar.com.wolox.android.example.ui.login.LoginFragment
@@ -46,4 +48,10 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun newsCreationFragment(): NewsCreationFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun individualNewActivity(): IndividualNewActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun individualNewFragment(): IndividualNewFragment
 }

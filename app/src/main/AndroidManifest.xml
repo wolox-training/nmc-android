@@ -11,7 +11,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".example.ui.home.news.newsCreation.NewsCreationActivity"></activity>
+        <activity android:name=".example.ui.home.news.individualNew.IndividualNewActivity"></activity>
+        <activity android:name=".example.ui.home.news.newsCreation.NewsCreationActivity" />
         <activity
             android:name=".example.ui.login.LoginActivity"
             android:screenOrientation="portrait">
