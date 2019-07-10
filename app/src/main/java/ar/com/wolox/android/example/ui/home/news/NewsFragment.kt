@@ -49,15 +49,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
-            val recentNews = presenter.loadRecentNews()
-            vSwipeRefreshLayout.isRefreshing = false
-
-            if (recentNews.isEmpty()) {
-                nothingNewToShow()
-            } else {
-                newsDataList.addAll(0, recentNews)
-                viewAdapter.notifyDataSetChanged()
-            }
+            presenter.loadRecentNews()
         }
     }
 
@@ -79,6 +71,17 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun nothingNewToShow() {
         vSwipeRefreshLayout.isRefreshing = false
         Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun addRecentNews(recentNews: java.util.ArrayList<String>) {
+        vSwipeRefreshLayout.isRefreshing = false
+
+        if (recentNews.isEmpty()) {
+            nothingNewToShow()
+        } else {
+            newsDataList.addAll(0, recentNews)
+            viewAdapter.notifyDataSetChanged()
+        }
     }
 
     companion object {

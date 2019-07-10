@@ -19,11 +19,11 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
         return oldNews
     }
 
-    fun loadRecentNews(): ArrayList<String> {
+    fun loadRecentNews() {
         val recentNews = ArrayList<String>()
         for (i in 0..2) {
             recentNews.add("Contact: " + 2)
         }
-        return recentNews
+        view.addRecentNews(recentNews)
     }
 }
