@@ -10,4 +10,12 @@ class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
     fun onAddNewsButtonPressed() = view.goAddNews()
 
     fun onPullDownRefresh() = view.nothingNewToShow()
+
+    fun loadMoreNews(newsToRefresh: Int): Collection<String> {
+        val oldNews = ArrayList<String>()
+        for (i in 0..newsToRefresh) {
+            oldNews.add("Contact: $newsToRefresh")
+        }
+        return oldNews
+    }
 }

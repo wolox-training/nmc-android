@@ -3,6 +3,7 @@ package ar.com.wolox.android.example.ui.home.news
 import android.content.Intent
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
@@ -29,6 +30,18 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    val totalItems = layoutManager?.itemCount
+                    val lastItem = viewManager.findLastVisibleItemPosition()
+
+                    if (lastItem + 1 == totalItems) {
+                        newsDataList.addAll(lastItem, presenter.loadMoreNews(NEWS_TO_REFRESH))
+                    }
+                    viewAdapter.notifyDataSetChanged()
+                }
+            })
         }
 
         fab_icon.setOnClickListener {
@@ -58,5 +71,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun nothingNewToShow() {
         vSwipeRefreshLayout.isRefreshing = false
         Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        private const val NEWS_TO_REFRESH = 5
     }
 }
