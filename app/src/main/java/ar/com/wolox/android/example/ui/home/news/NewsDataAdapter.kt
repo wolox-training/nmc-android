@@ -12,7 +12,7 @@ import kotlin.collections.ArrayList
 
 class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
 
-    private val uri = Uri.parse(imageURL)
+    private val uri = Uri.parse(IMAGE_URL)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val newsHolder = LayoutInflater.from(parent.context)
@@ -36,6 +36,6 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
     }
 
     companion object {
-        private const val imageURL = "https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg"
+        private const val IMAGE_URL = "https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg"
     }
 }
