@@ -25,6 +25,7 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
         newsHolder.run {
             contactName.text = newsDataList[position]
             draweeView.setImageURI(uri)
+            onItemClicked()
         }
     }
 
@@ -33,6 +34,15 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactName = itemView.news_name
         val draweeView: SimpleDraweeView = itemView.news_image
+        val itemContext = itemView.context
+
+        fun onItemClicked() {
+            itemView.setOnClickListener(View.OnClickListener {
+                /**
+                 * Put inside some code to open a new activity
+                 */
+            })
+        }
     }
 
     companion object {
