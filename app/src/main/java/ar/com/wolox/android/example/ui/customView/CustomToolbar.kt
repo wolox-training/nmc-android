@@ -12,19 +12,18 @@ class CustomToolbar @JvmOverloads constructor(
     defStyleAttr: Int = R.attr.toolbarStyle
 ) : Toolbar(context, attrs, defStyleAttr) {
 
-    private val woloxIcon = R.drawable.wolox_logo
-
     init {
         setBackgroundColor(Color.TRANSPARENT)
-        setLogo(woloxIcon)
-        setTitle(R.string.example_wolox)
+        setLogo(WOLOX_ICON)
+        title = WOLOX_TITLE
     }
 
-    fun setHomeTitle() {
-        setTitle(R.string.toolbar_wolox_home)
+    fun setCustomTitle(customTitle: String) {
+        title = "$WOLOX_TITLE - $customTitle"
     }
 
-    fun setNewsCreationTitle() {
-        setTitle(R.string.toolbar_wolox_news_creation)
+    companion object {
+        private const val WOLOX_ICON = R.drawable.wolox_logo
+        private const val WOLOX_TITLE = "Wolox"
     }
 }

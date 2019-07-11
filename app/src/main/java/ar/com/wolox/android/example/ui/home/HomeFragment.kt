@@ -26,7 +26,7 @@ class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
     }
 
     override fun init() {
-        vToolbarFragmentHome.setHomeTitle()
+        vToolbarFragmentHome.setCustomTitle(getString(R.string.home_title))
 
         vTabLayoutFragmentHome.setupWithViewPager(vViewPagerFragmentHome)
 
