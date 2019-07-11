@@ -12,6 +12,8 @@
     <string name="page_2_toolbar_title">Example Request</string>
     <string name="fragment_example_username">Username</string>
     <string name="fragment_example_login">Login</string>
+
+    <!-- Login -->
     <string name="ingrese_mail">Mail</string>
     <string name="ingrese_contraseña">Contraseña</string>
     <string name="boton_login">LOG IN</string>
@@ -24,5 +26,13 @@
     <string name="wrong_email_passowrd">Wrong Email or Password</string>
     <string name="no_network_connection">Network Error</string>
     <string name="unsuccessful_response">Unsuccessful Response</string>
+
+    <!-- Home -->
+    <string name="nothing_new_to_show">Nothing New</string>
+    <string name="toolbar_wolox_home">Wolox - Home</string>
+    <string name="example_news_time">15m</string>
+
+    <!-- News Creation -->
+    <string name="toolbar_wolox_news_creation">Wolox - News Creation</string>
 
 </resources>

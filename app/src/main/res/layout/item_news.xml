@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/news_items_height"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/news_image"
+        android:layout_width="@dimen/news_image_width_and_height"
+        android:layout_height="@dimen/news_image_width_and_height"
+        android:layout_alignStart="@+id/frame_layout"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_marginStart="@dimen/news_image_margins"
+        android:layout_marginTop="@dimen/news_general_margin_top"
+        android:layout_marginEnd="@dimen/news_image_margins"
+        android:layout_marginBottom="@dimen/news_image_margins"
+        fresco:roundedCornerRadius="@dimen/news_image_round_corner"/>
+
+    <TextView
+        android:id="@+id/news_name"
+        android:layout_width="@dimen/news_name_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_marginStart="@dimen/news_name_margin_start"
+        android:layout_marginTop="@dimen/news_general_margin_top"
+        android:layout_toEndOf="@+id/news_image"
+        android:textAlignment="gravity"
+        android:textAllCaps="false"
+        android:textSize="@dimen/font_medium_more"
+        android:textStyle="bold"
+        android:verticalScrollbarPosition="defaultPosition" />
+
+    <TextView
+        android:id="@+id/news_description"
+        android:layout_width="@dimen/news_name_width"
+        android:layout_height="@dimen/news_description_height"
+        android:layout_below="@+id/news_name"
+        android:layout_marginStart="@dimen/news_name_margin_start"
+        android:layout_toEndOf="@+id/news_image"
+        android:text="@string/example_message"
+        android:textSize="@dimen/font_medium_more" />
+
+    <TextView
+        android:id="@+id/news_time"
+        android:layout_width="@dimen/news_time_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frame_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/news_general_margin_top"
+        android:layout_toEndOf="@+id/news_name"
+        android:text="@string/example_news_time"
+        android:textAlignment="center" />
+
+    <ToggleButton
+        android:id="@+id/like_icon"
+        android:layout_width="@dimen/news_togglebutton_width_and_height"
+        android:layout_height="@dimen/news_togglebutton_width_and_height"
+        android:layout_below="@+id/news_time"
+        android:layout_alignEnd="@+id/frame_layout"
+        android:layout_marginStart="@dimen/news_togglebutton_margin_start_and_end"
+        android:layout_marginTop="@dimen/news_togglebutton_margin_top"
+        android:layout_marginEnd="@dimen/news_togglebutton_margin_start_and_end"
+        android:layout_toEndOf="@+id/news_description"
+        android:background="@drawable/ic_like_selected_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:textOff=""
+        android:textOn=""/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_divider_height"
+        android:layout_alignBottom="@+id/news_description"
+        android:layout_marginBottom="@dimen/news_divider_margin_bottom"
+        android:background="?android:attr/listDivider" />
+
+</RelativeLayout>
+
+

@@ -5,6 +5,9 @@ import javax.inject.Inject
 
 class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
 
-    override fun onViewAttached() {
-    }
+    override fun onViewAttached() {}
+
+    fun onAddNewsButtonPressed() = view.goAddNews()
+
+    fun onPullDownRefresh() = view.nothingNewToShow()
 }
