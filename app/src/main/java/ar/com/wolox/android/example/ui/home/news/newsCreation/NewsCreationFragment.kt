@@ -9,6 +9,6 @@ class NewsCreationFragment : WolmoFragment<NewsCreationPresenter>(), INewsCreati
     override fun layout(): Int = R.layout.fragment_news_creation
 
     override fun init() {
-        vToolbarNewsCreation.setNewsCreationTitle()
+        vToolbarNewsCreation.setCustomTitle(getString(R.string.news_creation_title))
     }
 }
