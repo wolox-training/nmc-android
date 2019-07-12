@@ -31,8 +31,12 @@
     <string name="home_title">Home</string>
     <string name="nothing_new_to_show">Nothing New</string>
     <string name="example_news_time">15m</string>
+    <string name="news_max_lines_preview">2</string>
+    <string name="fail_loading_older_news">Fail Loading Older News</string>
+    <string name="fail_loading_recent_news">Fail Loading Recent News</string>
 
     <!-- News Creation -->
     <string name="news_creation_title">News Creation</string>
+    <string name="news_max_lines_title">1</string>
 
 </resources>

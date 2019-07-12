@@ -5,15 +5,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
+import ar.com.wolox.android.example.network.News
 import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.fragment_news.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INewsView {
 
-    private val newsDataList = ArrayList<String>()
+    private val newsDataList = ArrayList<News>()
     private val viewAdapter = NewsDataAdapter(newsDataList)
     private val viewManager = LinearLayoutManager(context)
 
@@ -37,9 +39,8 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
                     val lastItem = viewManager.findLastVisibleItemPosition()
 
                     if (lastItem + 1 == totalItems) {
-                        newsDataList.addAll(lastItem, presenter.loadMoreNews(NEWS_TO_REFRESH))
+                        presenter.loadMoreNews(NEWS_TO_REFRESH, context)
                     }
-                    viewAdapter.notifyDataSetChanged()
                 }
             })
         }
@@ -49,7 +50,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
-            presenter.loadRecentNews()
+            presenter.loadRecentNews(context!!)
         }
     }
 
@@ -59,7 +60,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
      */
     private fun addContacts() {
         for (i in 0..9) {
-            newsDataList.add("Contact: $i")
+            newsDataList.add(News(PREDEF_TITLE, PREDEF_URL_SHIBA, PREDEF_TEXT))
         }
     }
 
@@ -73,18 +74,28 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
     }
 
-    override fun addRecentNews(recentNews: java.util.ArrayList<String>) {
-        vSwipeRefreshLayout.isRefreshing = false
+    override fun addRecentNews(recentNews: java.util.ArrayList<News>) {
+        newsDataList.addAll(0, recentNews)
+        viewAdapter.notifyDataSetChanged()
+    }
 
-        if (recentNews.isEmpty()) {
-            nothingNewToShow()
-        } else {
-            newsDataList.addAll(0, recentNews)
-            viewAdapter.notifyDataSetChanged()
-        }
+    override fun addOlderNews(olderNews: java.util.ArrayList<News>) {
+        newsDataList.addAll(olderNews)
+        viewAdapter.notifyDataSetChanged()
+    }
+
+    override fun startLoading() {
+        vSwipeRefreshLayout.isRefreshing = true
+    }
+
+    override fun completeLoading() {
+        vSwipeRefreshLayout.isRefreshing = false
     }
 
     companion object {
         private const val NEWS_TO_REFRESH = 5
+        private const val PREDEF_TITLE = "Ali Connors"
+        private const val PREDEF_URL_SHIBA = "https://pbs.twimg.com/profile_images/378800000351275038/4a1032af7d42f51cf1280203e4d92cdd.jpeg"
+        private const val PREDEF_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     }
 }
