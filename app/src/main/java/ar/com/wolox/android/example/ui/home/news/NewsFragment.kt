@@ -39,7 +39,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
                     val lastItem = viewManager.findLastVisibleItemPosition()
 
                     if (lastItem + 1 == totalItems) {
-                        presenter.loadMoreNews(NEWS_TO_REFRESH, context)
+                        presenter.onLoadOldNews(NEWS_TO_REFRESH, context)
                     }
                 }
             })
@@ -50,7 +50,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
-            presenter.loadRecentNews(context!!)
+            presenter.onLoadRecentNews(context!!)
         }
     }
 
@@ -80,7 +80,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun addOlderNews(olderNews: java.util.ArrayList<News>) {
-        newsDataList.addAll(olderNews)
+        newsDataList.addAll(newsDataList.size, olderNews)
         viewAdapter.notifyDataSetChanged()
     }
 
@@ -93,7 +93,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     companion object {
-        private const val NEWS_TO_REFRESH = 5
+        private const val NEWS_TO_REFRESH = 2
         private const val PREDEF_TITLE = "Ali Connors"
         private const val PREDEF_URL_SHIBA = "https://pbs.twimg.com/profile_images/378800000351275038/4a1032af7d42f51cf1280203e4d92cdd.jpeg"
         private const val PREDEF_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."

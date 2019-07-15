@@ -17,14 +17,12 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
 
     fun onAddNewsButtonPressed() = view.goAddNews()
 
-    fun onPullDownRefresh() = view.nothingNewToShow()
-
     /**
      * This function doesn't compare
      * older news with recent ones,
      * for now.
      */
-    fun loadMoreNews(newsToRefresh: Int, context: Context) {
+    fun onLoadOldNews(newsToRefresh: Int, context: Context) {
 
         mRetrofitServices.getService(NewsServices::class.java).getAllNews().enqueue(
                 networkCallback {
@@ -41,7 +39,7 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
         )
     }
 
-    fun loadRecentNews(context: Context) {
+    fun onLoadRecentNews(context: Context) {
         view.startLoading()
 
         mRetrofitServices.getService(NewsServices::class.java).getAllNews().enqueue(
