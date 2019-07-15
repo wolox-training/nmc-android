@@ -26,7 +26,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun init() {
         Fresco.initialize(context)
 
-        addContacts()
+        presenter.onLoadRecentNews(context!!)
 
         vRecyclerViewNews.apply {
             setHasFixedSize(true)
@@ -51,16 +51,6 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
         vSwipeRefreshLayout.setOnRefreshListener {
             presenter.onLoadRecentNews(context!!)
-        }
-    }
-
-    /**
-     * This function will be removed when we get
-     * the current news from the server.
-     */
-    private fun addContacts() {
-        for (i in 0..9) {
-            newsDataList.add(News(PREDEF_TITLE, PREDEF_URL_SHIBA, PREDEF_TEXT))
         }
     }
 
