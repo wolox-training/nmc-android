@@ -1,7 +1,9 @@
 package ar.com.wolox.android.example.ui.home.news
 
 import android.content.Intent
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
@@ -23,6 +25,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         return R.layout.fragment_news
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun init() {
         Fresco.initialize(context)
 
@@ -84,8 +87,5 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     companion object {
         private const val NEWS_TO_REFRESH = 2
-        private const val PREDEF_TITLE = "Ali Connors"
-        private const val PREDEF_URL_SHIBA = "https://pbs.twimg.com/profile_images/378800000351275038/4a1032af7d42f51cf1280203e4d92cdd.jpeg"
-        private const val PREDEF_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     }
 }

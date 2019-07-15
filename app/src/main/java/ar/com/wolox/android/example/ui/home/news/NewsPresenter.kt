@@ -1,14 +1,18 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.annotation.TargetApi
 import android.content.Context
+import android.os.Build
 import android.widget.Toast
 import ar.com.wolox.android.R
+import ar.com.wolox.android.example.network.News
 import ar.com.wolox.android.example.network.NewsServices
 import ar.com.wolox.android.example.utils.networkCallback
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices
 import javax.inject.Inject
 
+@TargetApi(Build.VERSION_CODES.O)
 class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : BasePresenter<INewsView>() {
 
     private val mRetrofitServices = retrofitServices
@@ -49,7 +53,7 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
                         if (it.isNullOrEmpty()) {
                             view.nothingNewToShow()
                         } else {
-                            view.addRecentNews(it)
+                            sortByMostRecent(it)
                         }
                     }
                     onResponseFailed { _, _ ->
@@ -58,5 +62,10 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
                     }
                 }
         )
+    }
+
+    private fun sortByMostRecent(newsList: ArrayList<News>) {
+        newsList.sortByDescending { it.getCreatedAt() }
+        view.addRecentNews(newsList)
     }
 }

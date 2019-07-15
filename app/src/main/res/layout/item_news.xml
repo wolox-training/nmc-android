@@ -61,7 +61,9 @@
         android:layout_marginTop="@dimen/news_general_margin_top"
         android:layout_toEndOf="@+id/news_name"
         android:text="@string/example_news_time"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:ellipsize="end"
+        android:maxLines="@string/news_max_lines_title"/>
 
     <ToggleButton
         android:id="@+id/like_icon"
