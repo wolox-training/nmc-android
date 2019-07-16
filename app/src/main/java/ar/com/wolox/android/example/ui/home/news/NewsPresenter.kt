@@ -3,8 +3,6 @@ package ar.com.wolox.android.example.ui.home.news
 import android.annotation.TargetApi
 import android.os.Build
 import ar.com.wolox.android.example.network.News
-import ar.com.wolox.android.example.network.NewsServices
-import ar.com.wolox.android.example.utils.networkCallback
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices
 import java.time.LocalDateTime
@@ -13,7 +11,7 @@ import javax.inject.Inject
 @TargetApi(Build.VERSION_CODES.O)
 class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : BasePresenter<INewsView>() {
 
-    private val mRetrofitServices = retrofitServices
+    private val mNewsAdapterAPI = NewsAdapterAPI(retrofitServices)
 
     override fun onViewAttached() {}
 
@@ -25,49 +23,39 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
      * for now.
      */
     fun onLoadOldNews() {
-        mRetrofitServices.getService(NewsServices::class.java).getOlderNews().enqueue(
-                networkCallback {
-                    onResponseSuccessful {
-                        if (it.isNullOrEmpty()) {
-                            view.nothingNewToShow()
-                        } else {
-                            view.addOlderNews(it.apply { setReadableCreationTime(this) })
-                        }
-                    }
-                    onResponseFailed { _, _ ->
-                        view.onLoadOlderNewsError()
-                    }
-                }
-        )
+        mNewsAdapterAPI.loadOlderNews({ onSuccessOlderNews(newsList = it) }, { onEmptyList() }, { onFailureOlderNews() })
+    }
+
+    private fun onSuccessOlderNews(newsList: ArrayList<News>) {
+        view.addOlderNews(newsList.apply { setReadableCreationTime(this) })
+    }
+
+    private fun onEmptyList() {
+        view.completeLoading()
+        view.nothingNewToShow()
+    }
+
+    private fun onFailureOlderNews() {
+        view.onLoadOlderNewsError()
     }
 
     fun onLoadRecentNews() {
         view.startLoading()
-
-        mRetrofitServices.getService(NewsServices::class.java).getAllNews().enqueue(
-                networkCallback {
-                    onResponseSuccessful {
-                        view.completeLoading()
-                        if (it.isNullOrEmpty()) {
-                            view.nothingNewToShow()
-                        } else {
-                            sortByMostRecent(it)
-                        }
-                    }
-                    onResponseFailed { _, _ ->
-                        view.completeLoading()
-                        view.onLoadRecentNewsError()
-                    }
-                }
-        )
+        mNewsAdapterAPI.loadRecentNews({ onSuccessRecentNews(newsList = it) }, { onEmptyList() }, { onFailureRecentNews() })
     }
 
-    private fun sortByMostRecent(newsList: ArrayList<News>) {
+    private fun onSuccessRecentNews(newsList: ArrayList<News>) {
+        view.completeLoading()
         newsList.apply {
             sortByDescending { it.getCreatedAt() }
             setReadableCreationTime(this)
         }
         view.addRecentNews(newsList)
+    }
+
+    private fun onFailureRecentNews() {
+        view.completeLoading()
+        view.onLoadRecentNewsError()
     }
 
     private fun setReadableCreationTime(newsList: ArrayList<News>): ArrayList<News> {
