@@ -4,14 +4,11 @@ import android.annotation.TargetApi
 import android.os.Build
 import ar.com.wolox.android.example.network.News
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
-import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 @TargetApi(Build.VERSION_CODES.O)
-class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : BasePresenter<INewsView>() {
-
-    private val mNewsAdapterAPI = NewsAdapterAPI(retrofitServices)
+class NewsPresenter @Inject constructor(private val newsAdapterAPI: NewsAdapterAPI) : BasePresenter<INewsView>() {
 
     override fun onViewAttached() {}
 
@@ -23,7 +20,7 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
      * for now.
      */
     fun onLoadOldNews() {
-        mNewsAdapterAPI.loadOlderNews({ onSuccessOlderNews(newsList = it) }, { onEmptyList() }, { onFailureOlderNews() })
+        newsAdapterAPI.loadOlderNews({ onSuccessOlderNews(newsList = it) }, { onEmptyList() }, { onFailureOlderNews() })
     }
 
     private fun onSuccessOlderNews(newsList: ArrayList<News>) {
@@ -41,7 +38,7 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
 
     fun onLoadRecentNews() {
         view.startLoading()
-        mNewsAdapterAPI.loadRecentNews({ onSuccessRecentNews(newsList = it) }, { onEmptyList() }, { onFailureRecentNews() })
+        newsAdapterAPI.loadRecentNews({ onSuccessRecentNews(newsList = it) }, { onEmptyList() }, { onFailureRecentNews() })
     }
 
     private fun onSuccessRecentNews(newsList: ArrayList<News>) {
