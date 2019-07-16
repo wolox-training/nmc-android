@@ -1,9 +1,7 @@
 package ar.com.wolox.android.example.ui.home.news
 
 import android.content.Intent
-import android.os.Build
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
@@ -25,11 +23,10 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         return R.layout.fragment_news
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun init() {
         Fresco.initialize(context)
 
-        presenter.onLoadRecentNews(context!!)
+        presenter.onLoadRecentNews()
 
         vRecyclerViewNews.apply {
             setHasFixedSize(true)
@@ -42,7 +39,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
                     val lastItem = viewManager.findLastVisibleItemPosition()
 
                     if (lastItem + 1 == totalItems) {
-                        presenter.onLoadOldNews(NEWS_TO_REFRESH, context)
+                        presenter.onLoadOldNews()
                     }
                 }
             })
@@ -53,7 +50,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         vSwipeRefreshLayout.setOnRefreshListener {
-            presenter.onLoadRecentNews(context!!)
+            presenter.onLoadRecentNews()
         }
     }
 
@@ -63,7 +60,6 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun nothingNewToShow() {
-        vSwipeRefreshLayout.isRefreshing = false
         Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
     }
 
@@ -85,7 +81,11 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         vSwipeRefreshLayout.isRefreshing = false
     }
 
-    companion object {
-        private const val NEWS_TO_REFRESH = 2
+    override fun onLoadOlderNewsError() {
+        Toast.makeText(context, R.string.fail_loading_older_news, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onLoadRecentNewsError() {
+        Toast.makeText(context, R.string.fail_loading_recent_news, Toast.LENGTH_SHORT).show()
     }
 }

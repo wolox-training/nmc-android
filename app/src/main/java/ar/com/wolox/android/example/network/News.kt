@@ -30,21 +30,17 @@ class News(
         text = externalText
     }
 
-    fun getUserId(): Int = userId
-
     fun getCreatedAt(): LocalDateTime = LocalDateTime.parse(createdAt.replace("Z", ""))
 
-    fun setTimeToNow(time: String) {
+    fun setReadableTime(time: String) {
         timeToNow = time
     }
 
-    fun getTimeToNow(): String = timeToNow
+    fun getReadableTime(): String = timeToNow
 
     fun getTitle(): String = title
 
     fun getPictureUrl(): String = picture
 
     fun getText(): String = text
-
-    fun getFirstLike(): Int? = likes?.get(0)
 }

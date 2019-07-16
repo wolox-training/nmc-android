@@ -22,4 +22,8 @@ public interface INewsView {
     void completeLoading();
 
     void addOlderNews(@NotNull ArrayList<News> olderNews);
+
+    void onLoadOlderNewsError();
+
+    void onLoadRecentNewsError();
 }

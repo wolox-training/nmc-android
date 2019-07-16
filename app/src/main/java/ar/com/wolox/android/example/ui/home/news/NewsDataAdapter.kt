@@ -29,7 +29,7 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
             contactName.text = newsDataList[position].getTitle()
             draweeView.setImageURI(Uri.parse(newsDataList[position].getPictureUrl()))
             newsDescription.text = newsDataList[position].getText()
-            newsTime.text = newsDataList[position].getCreatedAt().minute.toString() + "m"
+            newsTime.text = newsDataList[position].getReadableTime()
         }
     }
 
