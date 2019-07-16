@@ -6,11 +6,7 @@ import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 
 @TargetApi(Build.VERSION_CODES.O)
-class News(
-    externalTitle: String,
-    externalUrlPicture: String,
-    externalText: String
-) {
+class News {
     private var id = ""
     private var userId = 0
 
@@ -23,12 +19,6 @@ class News(
     private var likes: List<Int>? = null
 
     private var timeToNow = ""
-
-    init {
-        title = externalTitle
-        picture = externalUrlPicture
-        text = externalText
-    }
 
     fun getCreatedAt(): LocalDateTime = LocalDateTime.parse(createdAt.replace("Z", ""))
 
