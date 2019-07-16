@@ -25,7 +25,7 @@ class NewsPresenter @Inject constructor(retrofitServices: RetrofitServices) : Ba
      * for now.
      */
     fun onLoadOldNews() {
-        mRetrofitServices.getService(NewsServices::class.java).getAllNews().enqueue(
+        mRetrofitServices.getService(NewsServices::class.java).getOlderNews().enqueue(
                 networkCallback {
                     onResponseSuccessful {
                         if (it.isNullOrEmpty()) {
