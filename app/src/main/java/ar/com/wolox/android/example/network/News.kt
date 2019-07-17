@@ -15,7 +15,5 @@ data class News(
     val likes: List<Int>
 ) {
 
-    val readableCreationTime = PrettyTime().format(DateTime(createdAt).toDate())!!
-
-    fun setReadableCreationTime(): String = PrettyTime().format(DateTime(createdAt).toDate())!!
+    val readableCreationTime get() = PrettyTime().format(DateTime(createdAt).toDate())!!
 }
