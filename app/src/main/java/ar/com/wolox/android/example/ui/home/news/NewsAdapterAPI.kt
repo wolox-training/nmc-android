@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class NewsAdapterAPI @Inject constructor(private val retrofitServices: RetrofitServices) {
 
-    fun loadOlderNews(onSuccessOlderNews: (ArrayList<News>) -> Unit, onEmptyList: () -> Unit, onFailureOlderNews: () -> Unit) {
+    fun loadOlderNews(onSuccessOlderNews: (List<News>) -> Unit, onEmptyList: () -> Unit, onFailureOlderNews: () -> Unit) {
         retrofitServices.getService(NewsServices::class.java).getOlderNews().enqueue(
                 networkCallback {
                     onResponseSuccessful {
@@ -23,7 +23,7 @@ class NewsAdapterAPI @Inject constructor(private val retrofitServices: RetrofitS
         )
     }
 
-    fun loadRecentNews(onSuccessRecentNews: (ArrayList<News>) -> Unit, onEmptyList: () -> Unit, onFailureRecentNews: () -> Unit) {
+    fun loadRecentNews(onSuccessRecentNews: (List<News>) -> Unit, onEmptyList: () -> Unit, onFailureRecentNews: () -> Unit) {
         retrofitServices.getService(NewsServices::class.java).getAllNews().enqueue(
                 networkCallback {
                     onResponseSuccessful {

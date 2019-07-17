@@ -21,10 +21,10 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
 
     override fun onBindViewHolder(newsHolder: NewsViewHolder, position: Int) {
         newsHolder.run {
-            contactName.text = newsDataList[position].getTitle()
-            draweeView.setImageURI(Uri.parse(newsDataList[position].getPictureUrl()))
-            newsDescription.text = newsDataList[position].getText()
-            newsTime.text = newsDataList[position].getReadableTime()
+            contactName.text = newsDataList[position].title
+            draweeView.setImageURI(Uri.parse(newsDataList[position].picture))
+            newsDescription.text = newsDataList[position].text
+            newsTime.text = newsDataList[position].timeToNow
         }
     }
 

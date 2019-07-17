@@ -63,12 +63,12 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
     }
 
-    override fun addRecentNews(recentNews: java.util.ArrayList<News>) {
+    override fun addRecentNews(recentNews: List<News>) {
         newsDataList.addAll(0, recentNews)
         viewAdapter.notifyDataSetChanged()
     }
 
-    override fun addOlderNews(olderNews: java.util.ArrayList<News>) {
+    override fun addOlderNews(olderNews: List<News>) {
         newsDataList.addAll(newsDataList.size, olderNews)
         viewAdapter.notifyDataSetChanged()
     }
