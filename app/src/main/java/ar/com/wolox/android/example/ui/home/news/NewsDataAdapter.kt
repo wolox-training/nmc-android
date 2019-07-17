@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
+import ar.com.wolox.android.example.network.News
 import com.facebook.drawee.view.SimpleDraweeView
 import kotlinx.android.synthetic.main.item_news.view.*
-import kotlin.collections.ArrayList
 
-class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
-
-    private val uri = Uri.parse(IMAGE_URL)
+class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.Adapter<NewsDataAdapter.NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val newsHolder = LayoutInflater.from(parent.context)
@@ -23,17 +21,21 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
 
     override fun onBindViewHolder(newsHolder: NewsViewHolder, position: Int) {
         newsHolder.run {
-            contactName.text = newsDataList[position]
-            draweeView.setImageURI(uri)
+            contactName.text = newsDataList[position].title
+            draweeView.setImageURI(Uri.parse(newsDataList[position].picture))
+            newsDescription.text = newsDataList[position].text
+            newsTime.text = newsDataList[position].readableCreationTime
             onItemClicked()
         }
     }
 
-    override fun getItemCount() = newsDataList.size
+    override fun getItemCount(): Int = newsDataList.size
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactName = itemView.news_name
+        val newsDescription = itemView.news_description
         val draweeView: SimpleDraweeView = itemView.news_image
+        val newsTime = itemView.news_time
         val itemContext = itemView.context
 
         fun onItemClicked() {
@@ -43,9 +45,5 @@ class NewsDataAdapter(private val newsDataList: ArrayList<String>) : RecyclerVie
                  */
             })
         }
-    }
-
-    companion object {
-        private const val IMAGE_URL = "https://www.decentfashion.in/wp-content/uploads/2018/02/funnuioy-images-32-300x225.jpg"
     }
 }

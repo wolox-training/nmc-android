@@ -1,36 +1,49 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import ar.com.wolox.android.example.network.News
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import javax.inject.Inject
 
-class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
+class NewsPresenter @Inject constructor(private val newsAdapterAPI: NewsAdapterAPI) : BasePresenter<INewsView>() {
 
     override fun onViewAttached() {}
 
     fun onAddNewsButtonPressed() = view.goAddNews()
 
     /**
-     * This function is temporal,
-     * and only add as much as
-     * newsToRefresh's value.
+     * This function doesn't compare
+     * older news with recent ones,
+     * for now.
      */
-    fun loadMoreNews(newsToRefresh: Int): ArrayList<String> {
-        val oldNews = ArrayList<String>()
-        for (i in 0..newsToRefresh) {
-            oldNews.add("Contact: $newsToRefresh")
-        }
-        return oldNews
+    fun onLoadOldNews() {
+        newsAdapterAPI.loadOlderNews({ onSuccessOlderNews(newsList = it) }, { onEmptyList() }, { onFailureOlderNews() })
     }
 
-    /**
-     * This function is temporal,
-     * and puts only 2 news at the top.
-     */
-    fun loadRecentNews() {
-        val recentNews = ArrayList<String>()
-        for (i in 1..2) {
-            recentNews.add("Contact: " + 2)
-        }
-        view.addRecentNews(recentNews)
+    private fun onSuccessOlderNews(newsList: List<News>) {
+        view.addOlderNews(newsList)
+    }
+
+    private fun onEmptyList() {
+        view.completeLoading()
+        view.nothingNewToShow()
+    }
+
+    private fun onFailureOlderNews() {
+        view.onLoadOlderNewsError()
+    }
+
+    fun onLoadRecentNews() {
+        view.startLoading()
+        newsAdapterAPI.loadRecentNews({ onSuccessRecentNews(newsList = it) }, { onEmptyList() }, { onFailureRecentNews() })
+    }
+
+    private fun onSuccessRecentNews(newsList: List<News>) {
+        view.completeLoading()
+        view.addRecentNews(newsList)
+    }
+
+    private fun onFailureRecentNews() {
+        view.completeLoading()
+        view.onLoadRecentNewsError()
     }
 }

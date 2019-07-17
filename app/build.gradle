@@ -136,6 +136,8 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
     implementation 'com.facebook.fresco:fresco:2.0.0'
+    implementation 'joda-time:joda-time:2.10.3'
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
     // Testing dependencies
     testImplementation "junit:junit:$junit_version"

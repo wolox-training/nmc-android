@@ -1,6 +1,7 @@
 package ar.com.wolox.android.example.ui.example
 
 import ar.com.wolox.android.example.ui.home.news.INewsView
+import ar.com.wolox.android.example.ui.home.news.NewsAdapterAPI
 import ar.com.wolox.android.example.ui.home.news.NewsPresenter
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.times
@@ -10,19 +11,21 @@ import org.junit.Before
 import org.junit.Test
 
 class NewsPresenterTest {
-    private lateinit var mNewsPresenter: NewsPresenter
-    private lateinit var mINewsView: INewsView
+    private lateinit var newsPresenter: NewsPresenter
+    private lateinit var iNewsView: INewsView
+    private lateinit var newsAdapterAPI: NewsAdapterAPI
 
     @Before
     fun createInstances() {
-        mINewsView = mock(INewsView::class.java)
-        mNewsPresenter = NewsPresenter()
-        mNewsPresenter.attachView(mINewsView)
+        iNewsView = mock(INewsView::class.java)
+        newsAdapterAPI = mock(NewsAdapterAPI::class.java)
+        newsPresenter = NewsPresenter(newsAdapterAPI)
+        newsPresenter.attachView(iNewsView)
     }
 
     @Test
     fun showNewsCreationView() {
-        mNewsPresenter.onAddNewsButtonPressed()
-        verify(mINewsView, times(1)).goAddNews()
+        newsPresenter.onAddNewsButtonPressed()
+        verify(iNewsView, times(1)).goAddNews()
     }
 }
