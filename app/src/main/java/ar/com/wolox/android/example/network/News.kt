@@ -1,6 +1,8 @@
 package ar.com.wolox.android.example.network
 
 import com.google.gson.annotations.SerializedName
+import org.joda.time.DateTime
+import org.ocpsoft.prettytime.PrettyTime
 
 data class News(
     val id: String,
@@ -13,5 +15,7 @@ data class News(
     val likes: List<Int>
 ) {
 
-    var readableCreationTime = ""
+    val readableCreationTime = PrettyTime().format(DateTime(createdAt).toDate())!!
+
+    fun setReadableCreationTime(): String = PrettyTime().format(DateTime(createdAt).toDate())!!
 }

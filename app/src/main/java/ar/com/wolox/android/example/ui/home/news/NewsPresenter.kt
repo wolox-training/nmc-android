@@ -2,8 +2,6 @@ package ar.com.wolox.android.example.ui.home.news
 
 import ar.com.wolox.android.example.network.News
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
-import org.joda.time.DateTime
-import org.ocpsoft.prettytime.PrettyTime
 import javax.inject.Inject
 
 class NewsPresenter @Inject constructor(private val newsAdapterAPI: NewsAdapterAPI) : BasePresenter<INewsView>() {
@@ -22,10 +20,7 @@ class NewsPresenter @Inject constructor(private val newsAdapterAPI: NewsAdapterA
     }
 
     private fun onSuccessOlderNews(newsList: List<News>) {
-        view.addOlderNews(
-                newsList.run {
-                    setReadableCreationTime(this)
-                })
+        view.addOlderNews(newsList)
     }
 
     private fun onEmptyList() {
@@ -44,24 +39,11 @@ class NewsPresenter @Inject constructor(private val newsAdapterAPI: NewsAdapterA
 
     private fun onSuccessRecentNews(newsList: List<News>) {
         view.completeLoading()
-        view.addRecentNews(
-                newsList.run {
-                    setReadableCreationTime(this)
-                })
+        view.addRecentNews(newsList)
     }
 
     private fun onFailureRecentNews() {
         view.completeLoading()
         view.onLoadRecentNewsError()
-    }
-
-    private fun setReadableCreationTime(newsList: List<News>): List<News> {
-        val prettyTime = PrettyTime()
-
-        for (i in 0..newsList.lastIndex) {
-            newsList[i].readableCreationTime = prettyTime.format(DateTime(newsList[i].createdAt).toDate())
-        }
-
-        return newsList
     }
 }
