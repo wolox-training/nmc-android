@@ -10,7 +10,8 @@ data class News(
     val title: String,
     val picture: String,
     val text: String,
-    val likes: List<Int>){
+    val likes: List<Int>
+) {
 
     var readableCreationTime = ""
 }
