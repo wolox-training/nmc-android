@@ -5,8 +5,8 @@ import retrofit2.http.GET
 
 interface NewsServices {
     @GET("/news?_sort=createdAt&_order=desc")
-    fun getAllNews(): Call<ArrayList<News>>
+    fun getAllNews(): Call<List<News>>
 
     @GET("/news?_sort=createdAt&_order=desc")
-    fun getOlderNews(): Call<ArrayList<News>>
+    fun getOlderNews(): Call<List<News>>
 }
