@@ -40,9 +40,7 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
 
         fun onItemClicked() {
             itemView.setOnClickListener(View.OnClickListener {
-                /**
-                 * Put inside some code to open a new activity
-                 */
+                /**IndividualNewActivity.starter(itemContext ,)*/
             })
         }
     }
