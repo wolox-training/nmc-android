@@ -149,3 +149,7 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
 
 }
+
+androidExtensions {
+    experimental = true
+}
