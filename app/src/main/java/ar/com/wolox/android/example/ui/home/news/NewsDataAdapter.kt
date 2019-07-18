@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.network.News
+import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewActivity
 import com.facebook.drawee.view.SimpleDraweeView
 import kotlinx.android.synthetic.main.item_news.view.*
 
@@ -22,25 +23,31 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
     override fun onBindViewHolder(newsHolder: NewsViewHolder, position: Int) {
         newsHolder.run {
             contactName.text = newsDataList[position].title
-            draweeView.setImageURI(Uri.parse(newsDataList[position].picture))
+
+            /**
+             * I put this condition because some news are broken.
+             */
+            if (!newsDataList[position].picture.isNullOrEmpty()) {
+                draweeView.setImageURI(Uri.parse(newsDataList[position].picture)) }
+
             newsDescription.text = newsDataList[position].text
             newsTime.text = newsDataList[position].readableCreationTime
-            onItemClicked()
+            onItemClicked(newsDataList[position])
         }
     }
 
     override fun getItemCount(): Int = newsDataList.size
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val contactName = itemView.news_name
-        val newsDescription = itemView.news_description
+        val contactName = itemView.news_name!!
+        val newsDescription = itemView.news_description!!
         val draweeView: SimpleDraweeView = itemView.news_image
-        val newsTime = itemView.news_time
-        val itemContext = itemView.context
+        val newsTime = itemView.news_time!!
+        private val itemContext = itemView.context
 
-        fun onItemClicked() {
+        fun onItemClicked(new: News) {
             itemView.setOnClickListener(View.OnClickListener {
-                /**IndividualNewActivity.starter(itemContext ,)*/
+                IndividualNewActivity.starter(itemContext, new)
             })
         }
     }

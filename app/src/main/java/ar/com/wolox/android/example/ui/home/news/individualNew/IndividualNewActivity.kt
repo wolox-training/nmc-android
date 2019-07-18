@@ -12,19 +12,20 @@ class IndividualNewActivity @Inject constructor() : WolmoActivity() {
 
     @Inject internal lateinit var individualNewFragment: IndividualNewFragment
 
-    companion object {
-        fun starter(context: Context, noticia: News) {
-            val intent = Intent(context, IndividualNewActivity::class.java)
-            /**intent.putExtra("noticia",noticia)
-             *  I need to make "News" parcelable
-             */
-            startActivity(context, intent, intent.extras)
-        }
-    }
-
     override fun layout(): Int = R.layout.activity_individual_new
 
     override fun init() {
-        replaceFragment(R.id.activityIndividualNewBaseContent, individualNewFragment)
+        replaceFragment(R.id.activityIndividualNewBaseContent, IndividualNewFragment.newInstance(intent.getParcelableExtra(INDIVIDUAL_NEW)))
+    }
+
+    companion object {
+
+        private const val INDIVIDUAL_NEW = "INDIVIDUAL_NEW"
+
+        fun starter(context: Context, new: News) {
+            val intent = Intent(context, IndividualNewActivity::class.java)
+            intent.putExtra(INDIVIDUAL_NEW, new)
+            startActivity(context, intent, intent.extras)
+        }
     }
 }

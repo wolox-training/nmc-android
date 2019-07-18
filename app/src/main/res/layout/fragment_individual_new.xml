@@ -7,18 +7,18 @@
     android:orientation="vertical" >
 
     <Button
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/individual_new_back_button_dimension"
+        android:layout_height="@dimen/individual_new_back_button_dimension"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/individual_new_back_button_margins"
+        android:layout_marginTop="@dimen/individual_new_back_button_margins"
         android:background="@drawable/ic_back" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/individual_new_image"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/individual_new_image_height"
         android:contentDescription="@string/individual_new_image"
         tools:srcCompat="@tools:sample/avatars[13]" />
 
@@ -26,37 +26,35 @@
         android:id="@+id/new_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageView"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Title" />
+        android:layout_below="@id/individual_new_image"
+        android:layout_marginStart="@dimen/individual_new_title_margins"
+        android:layout_marginTop="@dimen/individual_new_title_margins" />
 
     <TextView
         android:id="@+id/new_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/individual_new_image"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="15m" />
+        android:layout_marginTop="@dimen/individual_new_time_margins"
+        android:layout_marginEnd="@dimen/individual_new_time_margins"/>
 
     <TextView
         android:id="@+id/new_description"
-        android:layout_width="83dp"
-        android:layout_height="44dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/new_title"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Description" />
+        android:layout_marginStart="@dimen/individual_new_description_margins"
+        android:layout_marginTop="@dimen/individual_new_description_margins"
+        android:layout_marginEnd="@dimen/individual_new_description_margins" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
+        android:id="@+id/like_button"
         android:layout_width="@dimen/news_togglebutton_width_and_height"
         android:layout_height="@dimen/news_togglebutton_width_and_height"
+        android:layout_below="@+id/new_description"
+        android:layout_marginTop="@dimen/individual_new_like_button_marginTop"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="180dp"
         android:background="@drawable/ic_like_selected_state"
         android:clickable="true"
         android:focusable="true"
