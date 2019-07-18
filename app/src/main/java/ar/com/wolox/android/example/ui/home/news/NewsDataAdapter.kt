@@ -32,6 +32,7 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
 
             newsDescription.text = newsDataList[position].text
             newsTime.text = newsDataList[position].readableCreationTime
+
             onItemClicked(newsDataList[position])
         }
     }
@@ -43,6 +44,7 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
         val newsDescription = itemView.news_description!!
         val draweeView: SimpleDraweeView = itemView.news_image
         val newsTime = itemView.news_time!!
+        val likeIcon = itemView.like_icon
         private val itemContext = itemView.context
 
         fun onItemClicked(new: News) {

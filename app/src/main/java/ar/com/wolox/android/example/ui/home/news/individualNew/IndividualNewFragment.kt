@@ -20,6 +20,7 @@ class IndividualNewFragment @Inject constructor() : WolmoFragment<IndividualNewP
     }
 
     companion object {
+        /**I put this image because the original ones from the server doesn't load.*/
         private const val HARDCODED_SHIBA = "https://webbonbon.com/wp-content/uploads/2018/01/cropped-doge.jpg"
 
         private const val NEW_ID = "NEW_ID"

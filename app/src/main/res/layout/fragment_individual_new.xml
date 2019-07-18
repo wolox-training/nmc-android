@@ -49,7 +49,7 @@
         android:layout_marginEnd="@dimen/individual_new_description_margins" />
 
     <ToggleButton
-        android:id="@+id/like_button"
+        android:id="@+id/new_like_button"
         android:layout_width="@dimen/news_togglebutton_width_and_height"
         android:layout_height="@dimen/news_togglebutton_width_and_height"
         android:layout_below="@+id/new_description"
