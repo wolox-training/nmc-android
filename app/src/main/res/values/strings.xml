@@ -40,5 +40,6 @@
     <string name="news_max_lines_preview">2</string>
 
     <string name="individual_new_image">This is the place for the individual new image.</string>
+    <string name="fail_refreshing_individual_new">Refreshing Error</string>
 
 </resources>

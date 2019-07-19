@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.ui.home.news.individualNew
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.network.News
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
@@ -13,10 +14,41 @@ class IndividualNewFragment @Inject constructor() : WolmoFragment<IndividualNewP
     override fun layout(): Int = R.layout.fragment_individual_new
 
     override fun init() {
+        val id = arguments?.getParcelable<News>(NEW_ID)?.id
         new_title.text = arguments?.getParcelable<News>(NEW_ID)?.title
         new_time.text = arguments?.getParcelable<News>(NEW_ID)?.readableCreationTime
         new_description.text = arguments?.getParcelable<News>(NEW_ID)?.text
         individual_new_image.setImageURI(Uri.parse(HARDCODED_SHIBA))
+
+        individual_new_back_button.setOnClickListener {
+            /**I need to go back to the News List View when this button is clicked*/
+        }
+
+        vSwipeRefreshLayoutIndividualNew.setOnRefreshListener {
+            presenter.onRefreshIndividualNew(id!!)
+        }
+    }
+
+    override fun refreshNewData(new: News) {
+        new_title.text = new.title
+        new_time.text = new.readableCreationTime
+        new_description.text = new.text
+    }
+
+    override fun nothingNewToShow() {
+        Toast.makeText(context, R.string.nothing_new_to_show, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRefreshNewError() {
+        Toast.makeText(context, R.string.fail_refreshing_individual_new, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun startLoading() {
+        vSwipeRefreshLayoutIndividualNew.isRefreshing = true
+    }
+
+    override fun completeLoading() {
+        vSwipeRefreshLayoutIndividualNew.isRefreshing = false
     }
 
     companion object {
