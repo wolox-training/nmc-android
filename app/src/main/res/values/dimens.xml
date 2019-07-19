@@ -76,5 +76,6 @@
     <dimen name="individual_new_like_button_marginTop">70dp</dimen>
     <dimen name="individual_new_max_width_title">250dp</dimen>
     <dimen name="individual_new_max_width_time">110dp</dimen>
+    <dimen name="individual_new_like_button_marginBottom">20dp</dimen>
 
 </resources>

@@ -55,29 +55,44 @@
             android:textSize="@dimen/font_medium_more"
             android:textAlignment="gravity"/>
 
-        <TextView
-            android:id="@+id/new_description"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/new_title"
-            android:layout_marginStart="@dimen/individual_new_description_margins"
-            android:layout_marginTop="@dimen/individual_new_description_margins"
-            android:layout_marginEnd="@dimen/individual_new_description_margins"
-            android:textAlignment="gravity"
-            android:textSize="@dimen/font_medium_extra"/>
+            android:layout_below="@id/new_title"
+            android:layout_alignParentBottom="true">
 
-        <ToggleButton
-            android:id="@+id/new_like_button"
-            android:layout_width="@dimen/news_togglebutton_width_and_height"
-            android:layout_height="@dimen/news_togglebutton_width_and_height"
-            android:layout_below="@+id/new_description"
-            android:layout_marginTop="@dimen/individual_new_like_button_marginTop"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/ic_like_selected_state"
-            android:clickable="true"
-            android:focusable="true"
-            android:textOff=""
-            android:textOn="" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/new_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/individual_new_description_margins"
+                    android:layout_marginTop="@dimen/individual_new_description_margins"
+                    android:layout_marginEnd="@dimen/individual_new_description_margins"
+                    android:textAlignment="gravity"
+                    android:textSize="@dimen/font_medium_extra" />
+
+                <ToggleButton
+                    android:id="@+id/new_like_button"
+                    android:layout_width="@dimen/news_togglebutton_width_and_height"
+                    android:layout_height="@dimen/news_togglebutton_width_and_height"
+                    android:layout_marginTop="@dimen/individual_new_like_button_marginTop"
+                    android:layout_marginBottom="@dimen/individual_new_like_button_marginBottom"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_like_selected_state"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textOff=""
+                    android:textOn="" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>
 
