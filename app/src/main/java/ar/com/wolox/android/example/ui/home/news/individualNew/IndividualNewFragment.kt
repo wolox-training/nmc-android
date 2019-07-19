@@ -25,7 +25,7 @@ class IndividualNewFragment @Inject constructor() : WolmoFragment<IndividualNewP
         individual_new_image.setImageURI(Uri.parse(HARDCODED_SHIBA))
 
         individual_new_back_button.setOnClickListener {
-            /**I need to go back to the News List View when this button is clicked*/
+            activity?.onBackPressed()
         }
 
         vSwipeRefreshLayoutIndividualNew.setOnRefreshListener {
