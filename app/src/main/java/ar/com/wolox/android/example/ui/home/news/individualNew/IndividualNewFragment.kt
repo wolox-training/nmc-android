@@ -15,9 +15,13 @@ class IndividualNewFragment @Inject constructor() : WolmoFragment<IndividualNewP
 
     override fun init() {
         val id = arguments?.getParcelable<News>(NEW_ID)?.id
-        new_title.text = arguments?.getParcelable<News>(NEW_ID)?.title
-        new_time.text = arguments?.getParcelable<News>(NEW_ID)?.readableCreationTime
-        new_description.text = arguments?.getParcelable<News>(NEW_ID)?.text
+
+        arguments?.getParcelable<News>(NEW_ID)?.run {
+            new_title.text = title
+            new_time.text = readableCreationTime
+            new_description.text = text
+        }
+
         individual_new_image.setImageURI(Uri.parse(HARDCODED_SHIBA))
 
         individual_new_back_button.setOnClickListener {
