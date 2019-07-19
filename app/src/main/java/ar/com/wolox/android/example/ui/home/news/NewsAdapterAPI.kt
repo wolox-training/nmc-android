@@ -37,4 +37,19 @@ class NewsAdapterAPI @Inject constructor(private val retrofitServices: RetrofitS
                 }
         )
     }
+
+    fun getNew(id: String, onSuccessRefresh: (News) -> Unit, onEmptyNew: () -> Unit, onFailureRefresh: () -> Unit) {
+        retrofitServices.getService(NewsServices::class.java).getIndividualNew(id).enqueue(
+                networkCallback {
+                    onResponseSuccessful {
+                        if (it != null) {
+                            onSuccessRefresh(it[0])
+                        } else {
+                            onEmptyNew()
+                        }
+                    }
+                    onResponseFailed { _, _ -> onFailureRefresh() }
+                }
+        )
+    }
 }

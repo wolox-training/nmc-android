@@ -1,14 +1,15 @@
 package ar.com.wolox.android.example.ui.home.news.individualNew
 
 import ar.com.wolox.android.example.network.News
+import ar.com.wolox.android.example.ui.home.news.NewsAdapterAPI
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import javax.inject.Inject
 
-class IndividualNewPresenter @Inject constructor(private val individualNewAdapterApi: IndividualNewAdapterAPI) : BasePresenter<IIndividualNewView>() {
+class IndividualNewPresenter @Inject constructor(private val newsAdapterApi: NewsAdapterAPI) : BasePresenter<IIndividualNewView>() {
 
     fun onRefreshIndividualNew(id: String) {
         view.startLoading()
-        individualNewAdapterApi.onRefreshIndividualNew(id, { onSuccessRefresh(new = it) }, { onEmptyNew() }, { onFailureRefresh() })
+        newsAdapterApi.getNew(id, { onSuccessRefresh(new = it) }, { onEmptyNew() }, { onFailureRefresh() })
     }
 
     private fun onSuccessRefresh(new: News) {

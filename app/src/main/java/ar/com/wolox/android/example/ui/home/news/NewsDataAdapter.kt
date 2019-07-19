@@ -28,7 +28,8 @@ class NewsDataAdapter(private val newsDataList: ArrayList<News>) : RecyclerView.
              * I put this condition because some news are broken.
              */
             if (!newsDataList[position].picture.isNullOrEmpty()) {
-                draweeView.setImageURI(Uri.parse(newsDataList[position].picture)) }
+                draweeView.setImageURI(Uri.parse(newsDataList[position].picture))
+            }
 
             newsDescription.text = newsDataList[position].text
             newsTime.text = newsDataList[position].readableCreationTime
