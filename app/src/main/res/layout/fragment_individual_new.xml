@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vSwipeRefreshLayoutIndividualNew"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/vIndividualNewFragment">
+
+        <Button
+            android:id="@+id/individual_new_back_button"
+            android:layout_width="@dimen/individual_new_back_button_dimension"
+            android:layout_height="@dimen/individual_new_back_button_dimension"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/individual_new_back_button_margins"
+            android:layout_marginTop="@dimen/individual_new_back_button_margins"
+            android:background="@drawable/ic_back" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/individual_new_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/individual_new_image_height"
+            android:contentDescription="@string/individual_new_image"
+            tools:srcCompat="@tools:sample/avatars[13]" />
+
+        <TextView
+            android:id="@+id/new_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/individual_new_image"
+            android:layout_marginStart="@dimen/individual_new_title_margins"
+            android:layout_marginTop="@dimen/individual_new_title_margins"
+            android:maxWidth="@dimen/individual_new_max_width_title"
+            android:textAlignment="gravity"
+            android:textSize="@dimen/font_large_extra"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/new_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/individual_new_image"
+            android:layout_alignParentEnd="true"
+            android:maxWidth="@dimen/individual_new_max_width_time"
+            android:layout_marginTop="@dimen/individual_new_time_margins"
+            android:layout_marginEnd="@dimen/individual_new_time_margins"
+            android:textSize="@dimen/font_medium_more"
+            android:textAlignment="gravity"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_title"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/new_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/individual_new_description_margins"
+                    android:layout_marginTop="@dimen/individual_new_description_margins"
+                    android:layout_marginEnd="@dimen/individual_new_description_margins"
+                    android:textAlignment="gravity"
+                    android:textSize="@dimen/font_medium_extra" />
+
+                <ToggleButton
+                    android:id="@+id/new_like_button"
+                    android:layout_width="@dimen/news_togglebutton_width_and_height"
+                    android:layout_height="@dimen/news_togglebutton_width_and_height"
+                    android:layout_marginTop="@dimen/individual_new_like_button_marginTop"
+                    android:layout_marginBottom="@dimen/individual_new_like_button_marginBottom"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_like_selected_state"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textOff=""
+                    android:textOn="" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
