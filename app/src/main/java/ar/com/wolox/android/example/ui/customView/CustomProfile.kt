@@ -14,7 +14,7 @@ class CustomProfile @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
-        inflate(R.layout.item_custom_profile, true)
+        inflate(R.layout.fragment_profile, true)
         /**vTitle.text = ""
         vEpigraph.text = ""
         vContinueButton.text = ""
