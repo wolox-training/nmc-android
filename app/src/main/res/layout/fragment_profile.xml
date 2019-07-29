@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,75 +11,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="0dp"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vGuideLineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95"/>
+        app:layout_constraintGuide_end="16dp" />
 
     <TextView
         android:id="@+id/vTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
         app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"
         android:textAlignment="center"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:text="Vinculemos tu cocina!" />
-
-    <ImageView
-        android:id="@+id/vImagePreview"
-        android:layout_width="@dimen/spacing_none"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"
-        app:layout_constraintTop_toBottomOf="@+id/vTitle"
-        tools:srcCompat="@tools:sample/avatars[13]" />
+        android:text="Algunas preguntas para conocerte" />
 
     <TextView
-        android:id="@+id/vEpigraph"
+        android:id="@+id/vSubtitle"
         android:layout_width="@dimen/spacing_none"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:textAlignment="center"
-        android:textSize="@dimen/font_medium_extra"
-        android:text="Con el Bluetooth activado, apretá el botón 'chech' y mantenete cerca para vincularla."
-        app:layout_constraintTop_toBottomOf="@+id/vImagePreview"
-        app:layout_constraintLeft_toLeftOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toRightOf="@id/vGuideLineRight"/>
-
-    <Button
-        android:id="@+id/vContinueButton"
-        android:layout_width="@dimen/spacing_none"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@id/avoid"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/vTitle"
         app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
         app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"
-        android:text="Continuar" />
+        android:textAlignment="center"
+        android:text="¿Seguís algunas de estas dietas?" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vItemRecyclerView"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/vSubtitle"
+        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
+        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"/>
 
     <TextView
         android:id="@+id/avoid"
         android:layout_width="@dimen/spacing_none"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toRightOf="@id/vGuideLineRight"
+        android:text="Omitir"
         android:textAlignment="center"
         android:textSize="16dp"
-        android:text="Omitir" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/vGuideLineLeft"
+        app:layout_constraintRight_toRightOf="@id/vGuideLineRight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
