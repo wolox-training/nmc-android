@@ -24,7 +24,6 @@ class Allergic @Inject constructor() : WolmoFragment<AllergicPresenter>(), Aller
     }
 
     private fun loadItems() {
-        items.clear()
         for (i in 0..5) {
             items.add("Item $i")
         }
