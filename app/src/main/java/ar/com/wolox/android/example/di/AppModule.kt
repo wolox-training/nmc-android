@@ -7,7 +7,10 @@ import ar.com.wolox.android.example.ui.home.news.newsCreation.NewsCreationFragme
 import ar.com.wolox.android.example.ui.home.news.NewsFragment
 import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewActivity
 import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewFragment
+import ar.com.wolox.android.example.ui.home.profile.Allergic
+import ar.com.wolox.android.example.ui.home.profile.Diet
 import ar.com.wolox.android.example.ui.home.profile.ProfileFragment
+import ar.com.wolox.android.example.ui.home.profile.TurnOnCooktop
 import ar.com.wolox.android.example.ui.login.LoginActivity
 import ar.com.wolox.android.example.ui.login.LoginFragment
 import ar.com.wolox.android.example.ui.signup.SingUpActivity
@@ -54,4 +57,13 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun individualNewFragment(): IndividualNewFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun dietFragment(): Diet
+
+    @ContributesAndroidInjector
+    internal abstract fun allergicFragment(): Allergic
+
+    @ContributesAndroidInjector
+    internal abstract fun turnOnCooktop(): TurnOnCooktop
 }

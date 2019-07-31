@@ -24,18 +24,26 @@ class ItemViewAdapter(private val items: ArrayList<String>) : RecyclerView.Adapt
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val description = itemView.vItem
         val selectedIcon = itemView.vSelectButton
 
         fun onItemViewClicked() {
             itemView.setOnClickListener {
-                selectedIcon.visibility = VISIBILITY
-                description.textSize = TEXT_SIZE
+                if (selectedIcon.visibility == VISIBILITY) {
+                    selectedIcon.visibility = UNVISIBLE
+                    description.textSize = ORIGINAL_TEXT_SIZE
+                } else {
+                    selectedIcon.visibility = VISIBILITY
+                    description.textSize = TEXT_SIZE
+                }
             }
         }
 
         companion object {
-            val VISIBILITY = 1
+            val VISIBILITY = 0
+            val UNVISIBLE = 4
+            val ORIGINAL_TEXT_SIZE = 16F
             val TEXT_SIZE = 18F
         }
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,39 +22,6 @@
         app:layout_constraintGuide_end="16dp" />
 
     <TextView
-        android:id="@+id/vTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="Algunas preguntas para conocerte" />
-
-    <TextView
-        android:id="@+id/vSubtitle"
-        android:layout_width="@dimen/spacing_none"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/vTitle"
-        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"
-        android:textAlignment="center"
-        android:text="¿Seguís algunas de estas dietas?" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/vItemRecyclerView"
-        android:layout_width="@dimen/spacing_none"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/vSubtitle"
-        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"/>
-
-    <TextView
         android:id="@+id/avoid"
         android:layout_width="@dimen/spacing_none"
         android:layout_height="wrap_content"
@@ -64,5 +32,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/vGuideLineLeft"
         app:layout_constraintRight_toRightOf="@id/vGuideLineRight" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vViewPagerProfile"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
+        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/vTabLayoutProfile"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="30dp"
+        android:layout_marginBottom="70dp"
+        app:tabPaddingStart="6dp"
+        app:tabPaddingEnd="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/avoid"
+        app:layout_constraintLeft_toRightOf="@id/vGuideLineLeft"
+        app:layout_constraintRight_toLeftOf="@id/vGuideLineRight"
+        app:tabBackground="@drawable/item_selector"
+        app:tabGravity="center"
+        app:tabIndicator="@null"
+        tools:layout_editor_absoluteX="24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
