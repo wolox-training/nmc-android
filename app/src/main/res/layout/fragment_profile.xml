@@ -21,18 +21,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <TextView
-        android:id="@+id/avoid"
-        android:layout_width="@dimen/spacing_none"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Omitir"
-        android:textAlignment="center"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/vGuideLineLeft"
-        app:layout_constraintRight_toRightOf="@id/vGuideLineRight" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vViewPagerProfile"
         android:layout_width="@dimen/spacing_none"
@@ -57,5 +45,17 @@
         app:tabGravity="center"
         app:tabIndicator="@null"
         tools:layout_editor_absoluteX="24dp" />
+
+    <TextView
+        android:id="@+id/avoid"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Omitir"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/vGuideLineLeft"
+        app:layout_constraintRight_toRightOf="@id/vGuideLineRight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

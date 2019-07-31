@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.home.profile
 
+import android.app.AlertDialog
 import androidx.core.util.Pair
 import ar.com.wolox.android.R
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
@@ -20,6 +21,12 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
     }
 
     override fun init() {
+
+        val avoidDialog = AlertDialog.Builder(activity).apply {
+            setMessage("En la sección Mi Perfil podrás completar las preferencias")
+            setPositiveButton("Aceptar") { _, _ -> }
+        }.create()
+
         vTabLayoutProfile.setupWithViewPager(vViewPagerProfile)
 
         fragmentProfileAdapter = SimpleFragmentPagerAdapter(childFragmentManager).apply {
@@ -33,6 +40,11 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
         vViewPagerProfile.apply {
             adapter = fragmentProfileAdapter
             offscreenPageLimit = VIEW_PAGER_TABS
+        }
+
+        avoid.setOnClickListener {
+            avoidDialog.show()
+            vViewPagerProfile.currentItem = 2
         }
     }
 

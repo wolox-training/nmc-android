@@ -3,7 +3,7 @@ package ar.com.wolox.android.example.ui.home.profile
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.com.wolox.android.R
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import kotlinx.android.synthetic.main.fragment_allergic.*
+import kotlinx.android.synthetic.main.fragment_onboarding_questions.*
 import javax.inject.Inject
 
 class Allergic @Inject constructor() : WolmoFragment<AllergicPresenter>(), AllergicView {
@@ -11,12 +11,12 @@ class Allergic @Inject constructor() : WolmoFragment<AllergicPresenter>(), Aller
     private var items = ArrayList<String>()
     private val itemAdapter = ItemViewAdapter(items)
 
-    override fun layout(): Int = R.layout.fragment_allergic
+    override fun layout(): Int = R.layout.fragment_onboarding_questions
 
     override fun init() {
         loadItems()
 
-        vRecyclerViewAllergic.apply {
+        vRecyclerViewDiet.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter

@@ -3,7 +3,7 @@ package ar.com.wolox.android.example.ui.home.profile
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.com.wolox.android.R
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import kotlinx.android.synthetic.main.fragment_diet.*
+import kotlinx.android.synthetic.main.fragment_onboarding_questions.*
 import javax.inject.Inject
 
 class Diet @Inject constructor() : WolmoFragment<DietPresenter>(), DietView {
@@ -11,7 +11,7 @@ class Diet @Inject constructor() : WolmoFragment<DietPresenter>(), DietView {
     private var items = ArrayList<String>()
     private val itemAdapter = ItemViewAdapter(items)
 
-    override fun layout(): Int = R.layout.fragment_diet
+    override fun layout(): Int = R.layout.fragment_onboarding_questions
 
     override fun init() {
         loadItems()
@@ -24,7 +24,6 @@ class Diet @Inject constructor() : WolmoFragment<DietPresenter>(), DietView {
     }
 
     private fun loadItems() {
-        items.clear()
         for (i in 0..4) {
             items.add("Item $i")
         }
