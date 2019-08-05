@@ -138,6 +138,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:2.0.0'
     implementation 'joda-time:joda-time:2.10.3'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
     // Testing dependencies
     testImplementation "junit:junit:$junit_version"

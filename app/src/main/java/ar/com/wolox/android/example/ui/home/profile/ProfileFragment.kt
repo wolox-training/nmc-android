@@ -3,6 +3,7 @@ package ar.com.wolox.android.example.ui.home.profile
 import android.app.AlertDialog
 import androidx.core.util.Pair
 import ar.com.wolox.android.R
+import ar.com.wolox.android.example.network.Item
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
@@ -43,12 +44,25 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
         }
 
         avoid.setOnClickListener {
-            avoidDialog.show()
-            vViewPagerProfile.currentItem = 2
+            if (vViewPagerProfile.currentItem != 2) {
+                avoidDialog.show()
+                vViewPagerProfile.currentItem = 2
+            } else {}
         }
     }
 
+
+    /**Para colocar items seleccionados en Diet, hardcoded*/
+    private fun putItemsInDiet() {
+        val items = ArrayList<Item>()
+        for (i in 0..4) {
+            items.add(Item("Item $i", true))
+        }
+        dietFragment.getItems(items)
+    }
+
     companion object {
-        val VIEW_PAGER_TABS = 2
+        const val VIEW_PAGER_TABS = 2
+        const val SHARED_PREFERENCES = "onboarding"
     }
 }

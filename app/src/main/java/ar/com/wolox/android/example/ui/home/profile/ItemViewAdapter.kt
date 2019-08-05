@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
+import ar.com.wolox.android.example.network.Item
 import kotlinx.android.synthetic.main.item_onboarding.view.*
 
-class ItemViewAdapter(private val items: ArrayList<String>) : RecyclerView.Adapter<ItemViewAdapter.ItemViewHolder>() {
+class ItemViewAdapter(private val items: ArrayList<Item>) : RecyclerView.Adapter<ItemViewAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -19,8 +20,11 @@ class ItemViewAdapter(private val items: ArrayList<String>) : RecyclerView.Adapt
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(itemHolder: ItemViewHolder, position: Int) {
-        itemHolder.description.text = items[position]
-        itemHolder.onItemViewClicked()
+        itemHolder.run {
+            description.text = items[position].name
+            onItemViewClicked(items[position])
+            setItemSelected(items[position].selected)
+        }
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,23 +32,30 @@ class ItemViewAdapter(private val items: ArrayList<String>) : RecyclerView.Adapt
         val description = itemView.vItem
         val selectedIcon = itemView.vSelectButton
 
-        fun onItemViewClicked() {
+        fun setItemSelected(state: Boolean) {
+            if (state) {
+                selectedIcon.visibility = View.VISIBLE
+                description.textSize = TEXT_SIZE
+            }
+        }
+
+        fun onItemViewClicked(item: Item) {
             itemView.setOnClickListener {
-                if (selectedIcon.visibility == VISIBILITY) {
-                    selectedIcon.visibility = UNVISIBLE
+                if (selectedIcon.visibility == View.VISIBLE) {
+                    item.selected = false
+                    selectedIcon.visibility = View.GONE
                     description.textSize = ORIGINAL_TEXT_SIZE
                 } else {
-                    selectedIcon.visibility = VISIBILITY
+                    item.selected = true
+                    selectedIcon.visibility = View.VISIBLE
                     description.textSize = TEXT_SIZE
                 }
             }
         }
 
         companion object {
-            val VISIBILITY = 0
-            val UNVISIBLE = 4
-            val ORIGINAL_TEXT_SIZE = 16F
-            val TEXT_SIZE = 18F
+            const val ORIGINAL_TEXT_SIZE = 16F
+            const val TEXT_SIZE = 18F
         }
     }
 }

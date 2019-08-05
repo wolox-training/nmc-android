@@ -35,7 +35,7 @@
         android:id="@+id/vTabLayoutProfile"
         android:layout_width="@dimen/spacing_none"
         android:layout_height="30dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="80dp"
         app:tabPaddingStart="6dp"
         app:tabPaddingEnd="6dp"
         app:layout_constraintBottom_toTopOf="@+id/avoid"
