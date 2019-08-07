@@ -5,8 +5,6 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.example.network.Item
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import kotlinx.android.synthetic.main.fragment_onboarding_questions.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
 class Allergic @Inject constructor() : WolmoFragment<AllergicPresenter>(), IAllergicView {
@@ -17,8 +15,6 @@ class Allergic @Inject constructor() : WolmoFragment<AllergicPresenter>(), IAlle
     override fun layout(): Int = R.layout.fragment_onboarding_questions
 
     override fun init() {
-        EventBus.getDefault().register(this)
-
         vSubtitle.text = "¿Sos alérgico o intolerante a algún alimento?"
 
         loadItems()
@@ -34,15 +30,6 @@ class Allergic @Inject constructor() : WolmoFragment<AllergicPresenter>(), IAlle
         for (i in 5..10) {
             items.add(Item("Item $i", false))
         }
-    }
-
-    /**Evento que se dispara al clickear el botón Continuar en TurnOnCooktop*/
-    @Subscribe
-    fun onSaveFoodPreferences(event: TurnOnCooktop.SaveEvent) {}
-
-    override fun onDestroy() {
-        EventBus.getDefault().unregister(this)
-        super.onDestroy()
     }
 
     companion object {

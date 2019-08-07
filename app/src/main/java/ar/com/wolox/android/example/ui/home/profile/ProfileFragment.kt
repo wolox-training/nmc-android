@@ -1,9 +1,12 @@
 package ar.com.wolox.android.example.ui.home.profile
 
 import android.app.AlertDialog
+import android.widget.Toast
 import androidx.core.util.Pair
+import androidx.viewpager.widget.ViewPager
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.network.Item
+import ar.com.wolox.android.example.ui.home.profile.turnOnCooktop.TurnOnCooktop
+import ar.com.wolox.android.example.utils.onClickListener
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
@@ -41,28 +44,40 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
         vViewPagerProfile.apply {
             adapter = fragmentProfileAdapter
             offscreenPageLimit = VIEW_PAGER_TABS
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+            })
         }
 
-        avoid.setOnClickListener {
+        avoid.onClickListener {
             if (vViewPagerProfile.currentItem != 2) {
                 avoidDialog.show()
                 vViewPagerProfile.currentItem = 2
-            } else {}
+            } else {
+            }
         }
+
+        /**I really don't know if this is OK*/
+        turnOnCooktop.setParentFragment(this)
     }
 
-
-    /**Para colocar items seleccionados en Diet, hardcoded*/
-    private fun putItemsInDiet() {
-        val items = ArrayList<Item>()
-        for (i in 0..4) {
-            items.add(Item("Item $i", true))
-        }
-        dietFragment.getItems(items)
+    /**
+     * This function is called from TurnOnCooktop
+     * and will Post data from Diet and Allergic fragments.
+     * */
+    fun saveAllData() {
+        Toast.makeText(context, "Continue touched", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
+        fun newInstance() = ProfileFragment()
         const val VIEW_PAGER_TABS = 2
-        const val SHARED_PREFERENCES = "onboarding"
     }
 }

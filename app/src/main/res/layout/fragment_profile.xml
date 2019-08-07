@@ -44,7 +44,7 @@
         app:tabBackground="@drawable/item_selector"
         app:tabGravity="center"
         app:tabIndicator="@null"
-        tools:layout_editor_absoluteX="24dp" />
+        />
 
     <TextView
         android:id="@+id/avoid"

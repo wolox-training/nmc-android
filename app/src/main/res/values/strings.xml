@@ -42,4 +42,7 @@
     <string name="individual_new_image">This is the place for the individual new image.</string>
     <string name="fail_refreshing_individual_new">Refreshing Error</string>
 
+    <string name="diet_subtitle">¿Seguís algunas de estas dietas?</string>
+    <string name="allergic_subtitle">¿Sos alérgico o intolerante a algún alimento?</string>
+
 </resources>

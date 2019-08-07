@@ -10,8 +10,6 @@ import javax.inject.Inject
 
 class IndividualNewActivity @Inject constructor() : WolmoActivity() {
 
-    @Inject internal lateinit var individualNewFragment: IndividualNewFragment
-
     override fun layout(): Int = R.layout.activity_individual_new
 
     override fun init() {

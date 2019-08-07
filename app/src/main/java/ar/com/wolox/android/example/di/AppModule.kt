@@ -10,7 +10,7 @@ import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewFrag
 import ar.com.wolox.android.example.ui.home.profile.Allergic
 import ar.com.wolox.android.example.ui.home.profile.Diet
 import ar.com.wolox.android.example.ui.home.profile.ProfileFragment
-import ar.com.wolox.android.example.ui.home.profile.TurnOnCooktop
+import ar.com.wolox.android.example.ui.home.profile.turnOnCooktop.TurnOnCooktop
 import ar.com.wolox.android.example.ui.login.LoginActivity
 import ar.com.wolox.android.example.ui.login.LoginFragment
 import ar.com.wolox.android.example.ui.signup.SingUpActivity
