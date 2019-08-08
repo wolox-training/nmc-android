@@ -11,6 +11,7 @@ import javax.inject.Inject
 class TurnOnCooktop @Inject constructor() : WolmoFragment<TurnOnCooktopPresenter>(), ITurnOnCooktopView {
 
     private lateinit var profileFragment: ProfileFragment
+    var onContinueClick: (() -> Unit)? = null
 
     override fun layout(): Int = R.layout.fragment_turn_on_cooktop
 
@@ -19,7 +20,7 @@ class TurnOnCooktop @Inject constructor() : WolmoFragment<TurnOnCooktopPresenter
         vVideoPreview.setImageURI(Uri.parse(HARCODED_SHIBA))
 
         vButtonContinue.onClickListener {
-            profileFragment.saveAllData()
+            onContinueClick?.let { it() }
         }
     }
 

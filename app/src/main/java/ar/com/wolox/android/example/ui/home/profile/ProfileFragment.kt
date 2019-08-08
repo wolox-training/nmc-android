@@ -64,8 +64,7 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
             }
         }
 
-        /**I really don't know if this is OK*/
-        turnOnCooktop.setParentFragment(this)
+        turnOnCooktop.onContinueClick = { saveAllData() }
     }
 
     /**
