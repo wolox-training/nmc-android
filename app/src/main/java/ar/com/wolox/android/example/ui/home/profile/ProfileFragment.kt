@@ -10,6 +10,7 @@ import ar.com.wolox.android.example.utils.onClickListener
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_turn_on_cooktop.*
 import javax.inject.Inject
 
 class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(), IProfileView {
@@ -20,6 +21,10 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
     override fun layout(): Int {
         return R.layout.fragment_profile
     }
+
+    /**
+     * Falta pedir por API las foodPreferences.
+     */
 
     override fun init() {
 
@@ -36,21 +41,28 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
             adapter = itemAdapter
         }
 
+        vOnboardingFoodProfilesContinueButton.onClickListener {
+            startOnboardingWithVideos()
+        }
+
         avoid.onClickListener {
             avoidDialog.show()
         }
     }
 
-    /**
-     * This function is called from TurnOnCooktop
-     * and will Post data from Diet and Allergic fragments.
-     * */
-    fun saveAllData() {
+    fun saveFoodPreferences() {
         Toast.makeText(context, "Continue touched", Toast.LENGTH_SHORT).show()
     }
 
+    private fun startOnboardingWithVideos() {
+        requireFragmentManager()
+                .beginTransaction()
+                .replace(R.id.vNewsCreationBaseActivity, OnboardingVideos.newInstance())
+                .commit()
+    }
+
     private fun loadItems() {
-        for (i in 0..10) {
+        for (i in 0..100) {
             items.add(Item("Item $i", false))
         }
     }

@@ -36,6 +36,11 @@ class ItemViewAdapter(private val items: ArrayList<Item>) : RecyclerView.Adapter
             if (state) {
                 selectedIcon.visibility = View.VISIBLE
                 description.textSize = TEXT_SIZE
+                description.setTextColor(itemView.context.resources.getColor(R.color.red))
+            } else {
+                selectedIcon.visibility = View.INVISIBLE
+                description.textSize = ORIGINAL_TEXT_SIZE
+                description.setTextColor(itemView.context.resources.getColor(R.color.colorBlack))
             }
         }
 
@@ -45,10 +50,12 @@ class ItemViewAdapter(private val items: ArrayList<Item>) : RecyclerView.Adapter
                     item.selected = false
                     selectedIcon.visibility = View.GONE
                     description.textSize = ORIGINAL_TEXT_SIZE
+                    description.setTextColor(itemView.context.resources.getColor(R.color.colorBlack))
                 } else {
                     item.selected = true
                     selectedIcon.visibility = View.VISIBLE
                     description.textSize = TEXT_SIZE
+                    description.setTextColor(itemView.context.resources.getColor(R.color.red))
                 }
             }
         }

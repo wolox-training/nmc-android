@@ -7,4 +7,6 @@
     <color name="colorAccent">#8DC63F</color>
     <color name="dot_unselected">#CACACA</color>
     <color name="dot_selected">#858585</color>
+    <color name="colorBlack">#000000</color>
+    <color name="red">#FF0000</color>
 </resources>
