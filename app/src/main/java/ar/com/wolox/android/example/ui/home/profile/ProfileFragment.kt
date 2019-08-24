@@ -16,7 +16,6 @@ import javax.inject.Inject
 class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(), IProfileView {
 
     private var items = ArrayList<Item>()
-    val y = 0.3
     private val itemAdapter = ItemViewAdapter(items)
     val last = 0
 
