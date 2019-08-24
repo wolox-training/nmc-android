@@ -6,6 +6,8 @@ import javax.inject.Inject
 
 class OnboardingVideos @Inject constructor() : WolmoFragment<OnboardingVideosPresenter>(), IOnboardingVideos {
 
+    val x = 0
+
     override fun layout(): Int = R.layout.fragment_onboarding_videos
 
     override fun init() {
