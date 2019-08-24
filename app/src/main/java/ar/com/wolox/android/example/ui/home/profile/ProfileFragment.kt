@@ -18,6 +18,7 @@ class ProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>(
     private var items = ArrayList<Item>()
     val y = 0.3
     private val itemAdapter = ItemViewAdapter(items)
+    val last = 0
 
     override fun layout(): Int {
         return R.layout.fragment_profile
