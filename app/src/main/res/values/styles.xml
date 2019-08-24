@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BigFont">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="RedFont">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
 </resources>

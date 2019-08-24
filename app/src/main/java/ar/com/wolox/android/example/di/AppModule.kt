@@ -9,6 +9,7 @@ import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewActi
 import ar.com.wolox.android.example.ui.home.news.individualNew.IndividualNewFragment
 import ar.com.wolox.android.example.ui.home.profile.Allergic
 import ar.com.wolox.android.example.ui.home.profile.Diet
+import ar.com.wolox.android.example.ui.home.profile.OnboardingVideos
 import ar.com.wolox.android.example.ui.home.profile.ProfileFragment
 import ar.com.wolox.android.example.ui.home.profile.turnOnCooktop.TurnOnCooktop
 import ar.com.wolox.android.example.ui.login.LoginActivity
@@ -66,4 +67,7 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun turnOnCooktop(): TurnOnCooktop
+
+    @ContributesAndroidInjector
+    internal abstract fun onboardingVideos(): OnboardingVideos
 }
