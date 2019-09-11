@@ -88,4 +88,8 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun onLoadRecentNewsError() {
         Toast.makeText(context, R.string.fail_loading_recent_news, Toast.LENGTH_SHORT).show()
     }
+
+    companion object {
+        fun newInstance() = NewsFragment()
+    }
 }
